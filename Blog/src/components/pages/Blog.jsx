@@ -6,24 +6,20 @@ const Blog = () => {
   const loadMovies = useLoaderData()
   const [movies,setDataMovies] = useState([])
 
-  // useEffect(()=>{
-  //   setDataMovies(loadMovies)
-  // },[loadMovies])
-  console.log()
+
+ 
   console.log(loadMovies.title)
 
 
   const navigate = useNavigate()
-  const producSelectHandle = loadMovies[0].title
-  const idString = (producSelectHandle) => {
-    return String(producSelectHandle).toLowerCase().split(' ').join('');
-  }
+  
   //FUNCION REFORMAR EL NOMBRE DE LA RUTA Y DIRECCIONAR A OTRA PAGINA
-  const rootId = idString(producSelectHandle)
+  
   // console.log(rootId)
   //Rutas al dar click en el evento
   const handleDetalles = (pMovie) => {
     let direccion = String(pMovie.title).toLowerCase().split(' ').join('');
+    console.log(pMovie)
     navigate(`/pelicula/${direccion}`, {
       state: {
         item: pMovie,
