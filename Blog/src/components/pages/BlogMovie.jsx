@@ -2,12 +2,17 @@ import React, { useEffect, useState } from 'react'
 import { user } from '../../assets/img'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { IoReturnDownBackOutline } from "react-icons/io5";
+import { FaCommentMedical } from "react-icons/fa";
+import { FaCommentSlash } from "react-icons/fa";
 import MovieComment from './movieComment';
+import Comentarios from './comment';
+import Comentario from './comments';
 function BlogMovie() {
   
     
         const navigate = useNavigate()
         const [movieDetalle, setMovieDetalle] = useState({})
+        const [clickViewComment, setClickViewComment] = useState(false)
         const MovieSelect = useLocation()
         //Manejar la cantidad del ADD
         useEffect (()=>{
@@ -15,9 +20,10 @@ function BlogMovie() {
         })
         console.log(movieDetalle)
         const backToMovie =()=>{
-            navigate("/")
+            navigate("/")  }
 
-        }
+        const viewComment =()=>{setClickViewComment(!clickViewComment)}
+        console.log(clickViewComment)
         //El location contiene toda la informacion de la pelicula seleccionada
 
         //parametro utilizados
@@ -93,19 +99,43 @@ function BlogMovie() {
                         
                         
     
-                        <div className=' flex justify-center items-center '>
+                        <div className=' flex justify-center items-center gap-10'>
                             <button className=' transition duration-500 h-10 w-10 rounded-2xl flex justify-center items-center ' onClick={backToMovie}>
                                 <IoReturnDownBackOutline className={`text-4xl  cursor-pointer
-             hover:scale-110 hover:border-[1px] border-green-teal transition-all
+             hover:scale-110 transition-all
              duration-100 rounded-2xl ease-in-out`}></IoReturnDownBackOutline>
                                 
                                 </button>
+                                {/* <button className=' transition duration-500 h-10 w-10 rounded-2xl flex justify-center items-center ' onClick={viewComment}>
+                                    {
+                                        clickViewComment ?
+                                        <FaCommentSlash className={`text-4xl  cursor-pointer
+                                        hover:scale-110   transition-all
+                                        duration-100 rounded-2xl ease-in-out`}/>
+                                        :
+                                        <FaCommentMedical  className={`text-4xl  cursor-pointer
+                                        hover:scale-110   transition-all
+                                        duration-100 rounded-2xl ease-in-out`}/>
+                                    }
+                                
+                                </button> */}
 
                         </div>
     
                     </div>
                 </div>
-                    <MovieComment></MovieComment>
+                <label className='bg-black flex text-white justify-center h-20 items-center font-bold text-lg'> Comentarios</label>
+                
+
+                <div className='m-5'>
+
+                    <Comentarios/>
+                </div>
+               
+                
+                <div>
+      </div>
+                
                 
             </div>
       )
