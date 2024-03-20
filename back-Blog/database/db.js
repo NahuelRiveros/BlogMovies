@@ -1,6 +1,6 @@
 import Sequelize from "sequelize";
 
-const db = new Sequelize("Blog", "Pruebas", "123456789", {
+const db = new Sequelize("PeliculasBlog", "postgres", "Hola1234", {
     host: "localhost",
     dialect:
         "postgres" /* one of 'mysql' | 'postgres' | 'sqlite' | 'mariadb' | 'mssql' | 'db2' | 'snowflake' | 'oracle' */,
@@ -19,6 +19,8 @@ async function createTables() {
     //     db.close();
     // }
 }
+
+db.sync({alter: true})
 
 createTables();
 
