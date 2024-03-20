@@ -18,9 +18,9 @@ async function createTables() {
     // finally {
     //     db.close();
     // }
-}
+};
 
-db.sync({alter: true})
+db.sync({alter: true});
 
 createTables();
 
