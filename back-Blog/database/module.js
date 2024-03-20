@@ -80,9 +80,9 @@ export const tbComentarioPelicula = db.define(
 );
 
 //comentario a comentarioPelicula
-tbComentario.belongsTo(tbComentarioPelicula, { foreignKey: { name: 'idComentario' } })
-tbComentarioPelicula.hasMany(tbComentario, { foreignKey: { name: 'idComentario' } })
+tbComentarioPelicula.belongsTo(tbComentario, { foreignKey: { name: 'idComentario' } });
+tbComentario.hasMany(tbComentarioPelicula, { foreignKey: { name: 'idComentario' } });
 
 //pelicula a comentarioPelicula
-tbPelicula.belongsTo(tbComentarioPelicula, { foreignKey: { name: 'idPelicula' } })
-tbComentarioPelicula.hasMany(tbPelicula, { foreignKey: { name: 'idPelicula' } })
+tbComentarioPelicula.belongsTo(tbPelicula, { foreignKey: { name: 'idPelicula' } });
+tbPelicula.hasMany(tbComentarioPelicula, { foreignKey: { name: 'idPelicula' } });
