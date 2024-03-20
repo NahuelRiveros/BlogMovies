@@ -2,6 +2,9 @@ import express from "express";
 import cors from "cors";
 import dotevn from "dotenv";
 import db from "./database/db.js";
+import Sequelize from './database/db.js';
+import rutasUser from './database/routes.js'
+import {tbComentario,tbPelicula,tbComentarioPelicula} from "./database/module.js";
 
 const env = dotevn.config();
 const app = express();

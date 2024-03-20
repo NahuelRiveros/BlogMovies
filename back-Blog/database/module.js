@@ -1,55 +1,88 @@
-export const tbPersona = db.define(
-    "Persona",
+import db from "./db.js";
+import { DataTypes } from 'sequelize';
+
+export const tbComentario = db.define(
+    "comentario",
     {
-        id_Persona: {
+        idComentario: {
             type: DataTypes.INTEGER,
             allowNull: false,
             autoIncrement: true,
             primaryKey: true,
+            unique: true,
         },
-        Nombre: {
-            type: DataTypes.STRING,
+        nombreAutor: {
+            type: DataTypes.STRING(200),
             allowNull: false,
         },
-        Segundo_Nombre: {
-            type: DataTypes.STRING,
-            allowNull: true,
-        },
-        Apellido: {
-            type: DataTypes.STRING,
-            allowNull: true,
-        },
-        Genero: {
-            type: DataTypes.STRING,
+        comentarioCompleto: {
+            type: DataTypes.STRING(10000),
             allowNull: false,
         },
-        Telefono: {
-            type: DataTypes.STRING,
+        fechaComentario: {
+            type: DataTypes.DATEONLY,
             allowNull: false,
         },
-        fk_id_Usuario: {
-            type: DataTypes.STRING,
+        puntuacion: {
+            type: DataTypes.INTEGER,
             allowNull: false,
-            references: {
-                model: "Usuario",
-                key: "id_Usuario",
-            },
         },
     },
     { freezeTableName: true }
 );
-export const tbUsuario = db.define(
-    "Usuario",
+
+export const tbPelicula = db.define(
+    "pelicula",
     {
-        id_Usuario: {
-            type: DataTypes.STRING,
+        idPelicula: {
+            type: DataTypes.INTEGER,
             allowNull: false,
-            autoIncrement: false,
+            autoIncrement: true,
             primaryKey: true,
             unique: true,
         },
-        Email: {
-            type: DataTypes.STRING,
+        nombrePelicula: {
+            type: DataTypes.STRING(200),
             allowNull: false,
+        },
+        posterPelicula: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
+        descripcionPelicula: {
+            type: DataTypes.STRING(1064),
+            allowNull: false,
+        },
+    },
+    { freezeTableName: true }
+);
+
+export const tbComentarioPelicula = db.define(
+    "comentarioPelicula",
+    {
+        idComentarioPelicula: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            autoIncrement: true,
+            primaryKey: true,
             unique: true,
-        }})
+        },
+        idPelicula: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
+        idComentario: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
+    },
+    { freezeTableName: true }
+);
+
+//comentario a comentarioPelicula
+tbComentario.belongsTo(tbComentarioPelicula, { foreignKey: { name: 'idComentario' } })
+tbComentarioPelicula.hasMany(tbComentario, { foreignKey: { name: 'idComentario' } })
+
+//pelicula a comentarioPelicula
+tbPelicula.belongsTo(tbComentarioPelicula, { foreignKey: { name: 'idPelicula' } })
+tbComentarioPelicula.hasMany(tbPelicula, { foreignKey: { name: 'idPelicula' } })
