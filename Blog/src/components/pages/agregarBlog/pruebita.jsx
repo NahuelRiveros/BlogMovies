@@ -5,7 +5,6 @@ export default function App() {
   const [MiText, setMiText] = useState("")
   const handleEditorChange = (content,editor) =>{
     setMiText(content)
-    onchange(content)
     console.log('conteniudo',content)}
     const handleSubmit = () => {
       // Manejador de envío del formulario
