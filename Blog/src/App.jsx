@@ -17,6 +17,7 @@ import BlogMovie from "./components/pages/BlogMovie";
 import axios from "axios";
 import Comentario from "./components/pages/comments";
 import Comentarios from "./components/pages/comment";
+import AgregarBlog from "./components/pages/agregarBlog/newBlog";
 
 
 // Extraer peliculas
@@ -80,7 +81,7 @@ const router = createBrowserRouter([
         element: <BlogMovie />
       },
       {path:'/test',
-      element:<Comentarios/>}    
+      element:<AgregarBlog/>}    
         // path:'/card',
         // element: <Pelicula/>
         // path: '/Producto/:id',

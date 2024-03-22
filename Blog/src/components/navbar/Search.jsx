@@ -30,7 +30,7 @@ const Search = () => {
              'bg-green-teal rounded-2xl text-white':null} p-1 pb-1 cursor-pointer
              hover:scale-110 hover:border-[1px] border-green-teal transition-all
              duration-100 rounded-2xl ease-in-out`}>
-                <li key={peli.id} className=" ">{peli.name}</li>
+                <li key={index} className=" ">{peli.name}</li>
                 
              </ul>    
             ))}

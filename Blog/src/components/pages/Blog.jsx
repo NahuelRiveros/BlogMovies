@@ -8,10 +8,6 @@ const Blog = () => {
   const [movies,setDataMovies] = useState([])
 
 
- 
-  console.log(loadMovies.title)
-
-
   const navigate = useNavigate()
   
   //FUNCION REFORMAR EL NOMBRE DE LA RUTA Y DIRECCIONAR A OTRA PAGINA
