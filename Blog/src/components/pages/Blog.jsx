@@ -29,7 +29,8 @@ const Blog = () => {
     <div>
       <Search></Search>
       <div className="text-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-10 px-10 md:px-15 lg:px-32 gap-2">
-        {loadMovies.map((items, index) => (
+
+        {loadMovies && loadMovies.map((items, index) => (
           <div key={index} className="cursor-pointer p-5 shadow-lg rounded">
             <h1 className="font-haken font-bold text-[22px]">{items.nombrePelicula}</h1>
             <div onClick={()=>handleDetalles(items)}>

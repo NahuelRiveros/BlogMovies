@@ -4,6 +4,11 @@ import Comentario from './comments';
 
 const Comentarios = () => {
   const [comentarios, setComentarios] = useState([]);
+  const [MiText, setMiText] = useState("")
+  const handleEditorChange = (content,editor) =>{
+    setMiText(content)
+    onchange(content)
+    console.log('conteniudo',content)}
 
   const handleSubmit = (values, { resetForm }) => {
     console.log('Nuevo comentario:', values.comentario);

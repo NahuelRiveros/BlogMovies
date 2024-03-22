@@ -20,7 +20,7 @@ const Search = () => {
           <BsSearch className="text-[20px] text-gray-400" />
           <input
             type="text"
-            placeholder="Buscar Pelicula"
+            placeholder="Buscar Contenido"
             className="outline-none ml-1 w-full font-haken font-bold text-center"
           />
         </div>
