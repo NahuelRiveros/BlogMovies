@@ -87,8 +87,8 @@ const router = createBrowserRouter([
         path: '/pelicula/:id',
         element: <BlogMovie />
       },
-      {path:'/test',
-      element:<AgregarBlog/>}    
+      //{path:'/test',
+      //element:<AgregarBlog/>}    
         // path:'/card',
         // element: <Pelicula/>
         // path: '/Producto/:id',

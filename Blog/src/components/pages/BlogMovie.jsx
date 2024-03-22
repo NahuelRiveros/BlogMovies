@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { user } from '../../assets/img'
+// import { user } from '../../assets/img'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { IoReturnDownBackOutline } from "react-icons/io5";
-import { FaCommentMedical } from "react-icons/fa";
-import { FaCommentSlash } from "react-icons/fa";
-import MovieComment from './movieComment';
+// import { FaCommentMedical } from "react-icons/fa";
+// import { FaCommentSlash } from "react-icons/fa";
+// import MovieComment from './movieComment';
 import Comentarios from './comment';
 import Comentario from './comments';
 function BlogMovie() {
-  
     
         const navigate = useNavigate()
         const [movieDetalle, setMovieDetalle] = useState({})
@@ -30,15 +29,14 @@ function BlogMovie() {
         //overview , original_title, release_date , poster_path
         //
 
-
         return (
             <div>
                 <div className='max-w-screen-lg mx-auto my-10 flex max-[740px]:flex-col gap-10 justify-center items-center'>
                     <p className='font-bodyFont text-center text-4xl font-bold min-[740px]:hidden'>
-                        {movieDetalle.original_title}
+                        {movieDetalle.nombrePelicula}
                     </p>
                     <div className='w-3/5 md:w-2/5 relative'>
-                        <img className='w-full h-[400px] object-cover' src={`https://image.tmdb.org/t/p/original${movieDetalle.backdrop_path}`} alt={'Img_Movie'} />
+                        <img className='w-full h-[400px] object-cover' src={movieDetalle.imagen} alt={'Poster Pelicula'} />
                         {/* Aqui pordemos poner lo que necesitemos encaso de que sea oferta o algo parecido */}
                         <div className='top-5 right-0 absolute'>
                             <p className='bg-black text-white font-semibold font-bodyFont py-1 px-8'>
@@ -48,11 +46,10 @@ function BlogMovie() {
                         </div>
                     </div>
                     {/* aqui podria ir si este articulo es de mujero o hombre */}
-    
                     <div className='w-3/5 flex flex-col justify-center gap-8'>
                         <div className='text-center'>
                             <p className='font-bodyFont text-4xl font-bold  max-[740px]:hidden'>
-                            {movieDetalle.original_title}
+                            {movieDetalle.nombrePelicula}
                             </p>
                             <div className=' items-center  text-center  max-[740px]:hidden'>
                                 <p className='text-2xl text-centerfont-mono'></p>
@@ -62,16 +59,12 @@ function BlogMovie() {
                         </div>
                         <div className='flex gap-2 items-center max-[720px]:justify-center text-base'>
                             <div className='flex'>
-    
-                              
-    
+
                             </div>
-                            
                         </div>
                         {/* <p className='text-base -mt-3 text-gray-500'>`{location.state.item.name} marca {location.state.item.brand} talle`</p> */}
                         {/* location.state.item del producto */}
                         <div className=' max-[740px]:flex-col items-center text-center'>
-    
                             <p className='text-bold text-gray-500'>
                                 Estreno: 
                                 <span className='font-medium capitalize pl-1'>
@@ -90,21 +83,16 @@ function BlogMovie() {
                                 {movieDetalle.vote_count}
                                 </span>
                             </p>
-                            
                         </div>
                         {/* location.state.item del producto */}
-                        <p className='text-base font-bodyFont -mt-3 text-gray-500'>{movieDetalle.overview}</p>
+                        <p className='text-base font-bodyFont -mt-3 text-gray-500'>{movieDetalle.descripcionPelicula}</p>
                             <p className='text-xs text-gray-500 '> (popularity {movieDetalle.popularity})
                             </p>
-                        
-                        
-    
                         <div className=' flex justify-center items-center gap-10'>
                             <button className=' transition duration-500 h-10 w-10 rounded-2xl flex justify-center items-center ' onClick={backToMovie}>
                                 <IoReturnDownBackOutline className={`text-4xl  cursor-pointer
              hover:scale-110 transition-all
              duration-100 rounded-2xl ease-in-out`}></IoReturnDownBackOutline>
-                                
                                 </button>
                                 {/* <button className=' transition duration-500 h-10 w-10 rounded-2xl flex justify-center items-center ' onClick={viewComment}>
                                     {
@@ -117,26 +105,16 @@ function BlogMovie() {
                                         hover:scale-110   transition-all
                                         duration-100 rounded-2xl ease-in-out`}/>
                                     }
-                                
                                 </button> */}
-
                         </div>
-    
                     </div>
                 </div>
                 <label className='bg-black flex text-white justify-center h-20 items-center font-bold text-lg'> Comentarios</label>
-                
-
                 <div className='m-5'>
-
                     <Comentarios/>
                 </div>
-               
-                
                 <div>
-      </div>
-                
-                
+                </div>
             </div>
       )
     }

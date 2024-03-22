@@ -1,6 +1,8 @@
 import db from "./db.js";
 import { DataTypes } from 'sequelize';
 
+
+
 export const tbComentario = db.define(
     "comentario",
     {
@@ -46,8 +48,8 @@ export const tbPelicula = db.define(
             allowNull: false,
         },
         posterPelicula: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
+            type: DataTypes.BLOB,
+            allowNull: true,
         },
         descripcionPelicula: {
             type: DataTypes.STRING(1064),

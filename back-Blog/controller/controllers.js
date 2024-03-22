@@ -2,7 +2,6 @@ import sequelize from 'sequelize';
 import {tbComentario,tbPelicula,tbComentarioPelicula} from "../database/module.js";
 
 export const AddPelicula = async (req, res) => {
-    console.log("patata1")
     try {
         const { nombrePelicula, posterPelicula, descripcionPelicula } = req.body;
         const AddingCat = await tbPelicula.create({ nombrePelicula, posterPelicula, descripcionPelicula });
@@ -35,7 +34,14 @@ export const AddComentarioPelicula = async (req, res) => {
 export const listPeliculas = async (req, res) => {
     try {
         const listaPeli = await tbPelicula.findAll();
-        return res.json({jsonPeli:listaPeli});
+        const listaPeliImagen = listaPeli.map((peli) => {
+            const peliculaD = peli.toJSON();
+            peliculaD.imagen = Buffer.from(peliculaD.posterPelicula).toString(
+                "base64"
+            );
+            return peliculaD;
+        });
+        return res.json({jsonPeli:listaPeliImagen});
         res.json({ msg: "Creado correctamente" });
     } catch (err) {
         res.json({ msg: err.message });
@@ -55,7 +61,8 @@ export const listComentarios = async (req, res) => {
 export const listComentariosPelis = async (req, res) => {
     try {
         const listComentarioPeli = await tbComentarioPelicula.findAll();
-        return res.json({jsonComentarioPeli:listComentarioPeli});
+        const listComentario = await tbComentario.findAll();
+        return res.json({jsonComentarioPeli:listComentarioPeli,jsonComentario:listComentario});
         res.json({ msg: "Creado correctamente" });
     } catch (err) {
         res.json({ msg: err.message });
