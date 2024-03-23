@@ -6,10 +6,12 @@ const upload = multer ({dest: "uploads/"})
 
 const rutas = express.Router();
 
-rutas.post('/peliculas/', upload.single("image"),async (req,res) => {
+rutas.post('/peliculas/', upload.single("posterPelicula"),async (req,res) => {
+    console.log(req)
     const fileTemPath = req.file.path
     const fileContent = fs.readFileSync(fileTemPath);
     try {
+        console.log()
         const { tema, descripcion } = req.body;
         const AddingCat = await tbPelicula.create({ nombrePelicula:tema, posterPelicula:fileContent, descripcionPelicula:descripcion });
         res.json({ msg: "Creado correctamente" });
