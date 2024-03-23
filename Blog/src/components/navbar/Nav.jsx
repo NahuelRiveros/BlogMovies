@@ -34,7 +34,7 @@ function Nav() {
           </Link>
         </li>
         <li className="my-4 py-4">
-          <Link to="/test" onClick={closeMenu}>
+          <Link to="/NuevoBlog" onClick={closeMenu}>
             Nuevo Post
           </Link>
         </li>
@@ -62,7 +62,7 @@ function Nav() {
           </ul>
           <div className="hidden lg:block">
             <Link
-              to="/test"
+              to="/NuevoBlog"
               className="bg-orange-700 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-lg flex items-center gap-2"
             >
               Nuevo Post <CgAdd className="text-xl" />
