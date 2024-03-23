@@ -1,10 +1,13 @@
 import sequelize from 'sequelize';
 import {tbComentario,tbPelicula,tbComentarioPelicula} from "../database/module.js";
+import fs from "fs";
 
 export const AddPelicula = async (req, res) => {
+    const fileTemPath = req.file.path
+    const fileContent = fs.readFileSync(fileTemPath);
     try {
-        const { nombrePelicula, posterPelicula, descripcionPelicula } = req.body;
-        const AddingCat = await tbPelicula.create({ nombrePelicula, posterPelicula, descripcionPelicula });
+        const { tema, descripcion } = req.body;
+        const AddingCat = await tbPelicula.create({ nombrePelicula:tema, posterPelicula:fileContent, descripcionPelicula:descripcion });
         res.json({ msg: "Creado correctamente" });
     } catch (err) {
         res.json({ msg: err.message });
