@@ -10,7 +10,7 @@ const Blog = () => {
 
 
   const navigate = useNavigate()
-  
+  console.log(loadMovies)
   //FUNCION REFORMAR EL NOMBRE DE LA RUTA Y DIRECCIONAR A OTRA PAGINA
   
   // console.log(rootId)
