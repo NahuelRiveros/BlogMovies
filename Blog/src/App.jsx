@@ -83,7 +83,7 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Blog />,
-        loader: null,
+        loader: consulMovie,
       },
       {
         path: '/pelicula/:id',

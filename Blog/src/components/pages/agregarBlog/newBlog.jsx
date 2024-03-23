@@ -1,45 +1,40 @@
 import React, { useRef, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-
+import { IoReturnDownBackOutline } from "react-icons/io5";
+import { FaBackspace } from "react-icons/fa";
 import { Editor } from "@tinymce/tinymce-react";
+import { BsBack } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 const AgregarBlog = ({ onSubmit }) => {
   //const editorRef = useRef(null); // Referencia al editor
   const [cargando, setCargando] = useState(false);
-  const [contenidoEditor, setContenidoEditor] = useState(""); // Estado para almacenar el contenido del editor
-
-  const handleSubmit =  async (values, { resetForm }) => {
-    setTimeout( async () => {
-    //captura del text area
-    // const contenidoEditor = editorRef.current
-    const imagen = values.image 
+  const backToMovie = () => {
+    navigate("/");
+  };
+  const handleSubmit = async (values, { resetForm }) => {
+    setTimeout(async () => {
+      //captura del text area
+      // const contenidoEditor = editorRef.current
+      const imagen = values.image
       // .getContent()
       // .replace(/<\/?p>/g, "");
 
-    // Combina los valores del formulario con el contenido del editor
-    const nuevosValores = { ...values };
-    
-    
-    // Aqui se encuentran los valores que van a la base de datos del nuevo Blog creado;
-    console.log("los valores  son ", nuevosValores);
-    const URI = "http://127.0.0.1:8000/peliculas/"
+      // Combina los valores del formulario con el contenido del editor
+      const nuevosValores = { ...values, contenido: contenidoEditor };
 
-    await axios.post(URI, values).then((res)=> {
-      if (!res.data.error) {
-        console.log(res.data)
-      } else {
-        console.log(res.data.error)
-      }
-    })
 
-    // Limpiar el formulario después de enviar
-    resetForm();
-    // if (editorRef.current) {
-    //   editorRef.current.setContent("");
-    // }
-    // Restablecer el contenido del CKEditor a un valor predeterminado (por ejemplo, un texto vacío)
-    setCargando(false);
-  }, 2000);
+      // Aqui se encuentran los valores que van a la base de datos del nuevo Blog creado;
+      console.log("los valores  son ", nuevosValores);
+
+      // Limpiar el formulario después de enviar
+      resetForm();
+      // if (editorRef.current) {
+      //   editorRef.current.setContent("");
+      // }
+      // Restablecer el contenido del CKEditor a un valor predeterminado (por ejemplo, un texto vacío)
+      setCargando(false);
+    }, 2000);
   };
 
   //codigo text area
@@ -107,35 +102,45 @@ const AgregarBlog = ({ onSubmit }) => {
 
                 {/* Inpust detalle producto */}
                 <div className="relative flex h-10 w-full flex-row-reverse overflow-clip rounded-lg">
-                            <Field className="peer w-full rounded-r-lg border border-slate-400 px-2 text-slate-900 placeholder-slate-400 transition-colors duration-300 focus:border-sky-400 focus:outline-none"
-                                type="text" 
-                                name="descripcion"
-                                id="descripcion"
-                                placeholder="Descripcion"></Field>
-                            <label className="flex items-center rounded-l-lg border border-slate-400 bg-slate-50 px-2 text-sm text-slate-500 transition-colors duration-300 peer-focus:border-sky-400 peer-focus:bg-sky-400 peer-focus:text-white" >Descripcion</label>
-                        </div>
-                        {/* Inpust detalle producto */}
+                  <Field className="peer w-full rounded-r-lg border border-slate-400 px-2 text-slate-900 placeholder-slate-400 transition-colors duration-300 focus:border-sky-400 focus:outline-none"
+                    type="text"
+                    name="descripcion"
+                    id="descripcion"
+                    placeholder="Descripcion"></Field>
+                  <label className="flex items-center rounded-l-lg border border-slate-400 bg-slate-50 px-2 text-sm text-slate-500 transition-colors duration-300 peer-focus:border-sky-400 peer-focus:bg-sky-400 peer-focus:text-white" >Descripcion</label>
+                </div>
+                {/* Inpust detalle producto */}
 
               </div>
-              <div className="flex justify-center">
-                   {/* Seleccionar Imagen */}
-                   <div className="">
-                            <Field
-                                id="image"
-                                name="image"
-                                type="file"
-                                className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 mt-4 mx-3"
-                            />
+              <div className="flex items-center  justify-center gap-5">
+                {/* Seleccionar Imagen */}
+                <div className="">
+                  <Field
+                    id="image"
+                    name="image"
+                    type="file"
+                    className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 mt-4 mx-3"
+                  />
 
-                        </div>
-                        {/* Seleccionar Imagen */}
+                </div>
+                {/* Seleccionar Imagen */}
                 <button
                   type="submit"
                   disabled={cargando}
-                  className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 mt-4 mx-3"
+                  className="bg-blue-500 text-white  p-2 rounded hover:bg-blue-600mx-3"
                 >
-                  {cargando ? 'Cargando...' : 'Crear Blog'}
+                  {cargando ? "Cargando..." : "Crear Blog"}
                 </button>
+                <Link
+                  className="flex items-center transition duration-500 h-10 w-10 rounded-2xl bg-blue-500 text-white  p-2 hover:bg-blue-600"
+                  to={"/"}
+                >
+                  <FaBackspace
+                    className={`text-4xl cursor-pointer
+             hover:scale-110 transition-all
+             duration-100 rounded-2xl ease-in-out`}
+                  ></FaBackspace>
+                </Link>
               </div>
             </Form>
           )}
