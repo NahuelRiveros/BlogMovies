@@ -141,11 +141,11 @@ const AgregarBlog = ({ onSubmit }) => {
                   className="flex items-center transition duration-500 h-10 w-10 rounded-2xl bg-blue-500 text-white  p-2 hover:bg-blue-600"
                   to={"/"}
                 >
-                  <FaBackspace
+                  {/* <FaBackspace
                     className={`text-4xl cursor-pointer
              hover:scale-110 transition-all
              duration-100 rounded-2xl ease-in-out`}
-                  ></FaBackspace>
+                  ></FaBackspace> */}
                 </Link>
               </div>
             </Form>
