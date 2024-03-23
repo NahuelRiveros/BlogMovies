@@ -1,11 +1,8 @@
 import sequelize from 'sequelize';
 import {tbComentario,tbPelicula,tbComentarioPelicula} from "../database/module.js";
-import multer from "multer";
 import fs from "fs";
-const upload = multer ({dest: "uploads/"})
 
 export const AddPelicula = async (req, res) => {
-    //const imagen1 = upload.single(req.body.image)
     const fileTemPath = req.file.path
     const fileContent = fs.readFileSync(fileTemPath);
     try {
