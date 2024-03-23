@@ -18,16 +18,16 @@ import Footer from "./components/Footer/Foorter";
 // Extraer peliculas
 // const [datalistMovies, setDatalistMovies] = useState([]);
 
-//let datalistMovies = []
-// const options = {
-//     method: "GET",
-//     url: "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc",
-//     headers: {
-//         accept: "application/json",
-//         Authorization:
-//         "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkOWY0NTBjZjljNjE0Zjc3Yzc2M2U2NGYxZmE5NTNlZSIsInN1YiI6IjY1Zjg2M2Y0NTk0Yzk0MDE3YzNhNjQ0ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QTwpGhgZMKVQ_ZRgFlpIJ9qqAT-StQ-KmCWQt3KQmb4",
-//     },
-// };
+let datalistMovies = []
+const options = {
+    method: "GET",
+    url: "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc",
+    headers: {
+        accept: "application/json",
+        Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkOWY0NTBjZjljNjE0Zjc3Yzc2M2U2NGYxZmE5NTNlZSIsInN1YiI6IjY1Zjg2M2Y0NTk0Yzk0MDE3YzNhNjQ0ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QTwpGhgZMKVQ_ZRgFlpIJ9qqAT-StQ-KmCWQt3KQmb4",
+    },
+};
 
 // Extraer Base de Datos
 //let peliculas = []
@@ -85,7 +85,8 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Blog />,
-        loader: consulPeli,
+        // loader: consulPeli,
+        loader: consulMovie,
       },
       {
         path: '/pelicula/:id',

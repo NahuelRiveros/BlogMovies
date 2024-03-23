@@ -16,8 +16,8 @@ function Nav() {
   };
 
   const contentNav = (
-    <div className="lg:hidden absolute top-[6rem] w-full bg-gray-900 text-white transition">
-      <ul className="text-center text-xl p-8">
+    <div className="lg:hidden left-0 right-0  absolute top-[3.8rem] w-full bg-gray-900 text-white transition">
+      <ul className="text-center text-xl">
         <li className="my-4 py-4 border-b border-gray-700">
           <Link to="/" onClick={closeMenu}>
             Home
@@ -43,8 +43,8 @@ function Nav() {
   );
 
   return (
-    <nav className="bg-gray-900 text-white">
-      <div className="overflow-auto  mx-auto flex justify-between items-center py-4 px-8 lg:px-0">
+    <nav className="bg-gray-900 text-white px-5">
+      <div className="mx-auto flex justify-between items-center py-4 px-8 lg:px-0">
         <div>
           <img src="" alt="Logo" className="w-16 rounded-full" />
         </div>

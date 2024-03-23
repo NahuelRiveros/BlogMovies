@@ -4,6 +4,7 @@ import { Formik, Form, Field, ErrorMessage,useFormik } from "formik";
 import { Editor } from "@tinymce/tinymce-react";
 import { BsBack } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import { FaBackspace } from "react-icons/fa";
 
 const AgregarBlog = ({ onSubmit }) => {
   //const editorRef = useRef(null); // Referencia al editor
