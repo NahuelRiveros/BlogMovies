@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field, ErrorMessage,useFormik } from "formik";
 
 import { Editor } from "@tinymce/tinymce-react";
 
@@ -18,9 +18,16 @@ const AgregarBlog = ({ onSubmit }) => {
     // Combina los valores del formulario con el contenido del editor
     const nuevosValores = { ...values, contenido: contenidoEditor };
     
-    
     // Aqui se encuentran los valores que van a la base de datos del nuevo Blog creado;
     console.log("los valores  son ", nuevosValores);
+    // const {dataPeli} = await axios.post('http://localhost:8000/peliculas/', {
+    //     nuevosValores
+    // }, {
+    //     headers: {
+    //         accept: "application/json",
+    //     }
+    //   }
+    // )
 
     // Limpiar el formulario después de enviar
     resetForm();
