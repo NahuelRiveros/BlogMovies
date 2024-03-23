@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import { IoReturnDownBackOutline } from "react-icons/io5";
-import { FaBackspace } from "react-icons/fa";
+import { Formik, Form, Field, ErrorMessage,useFormik } from "formik";
+
 import { Editor } from "@tinymce/tinymce-react";
 import { BsBack } from "react-icons/bs";
 import { Link } from "react-router-dom";
@@ -20,12 +19,19 @@ const AgregarBlog = ({ onSubmit }) => {
       // .getContent()
       // .replace(/<\/?p>/g, "");
 
-      // Combina los valores del formulario con el contenido del editor
-      const nuevosValores = { ...values, contenido: contenidoEditor };
-
-
-      // Aqui se encuentran los valores que van a la base de datos del nuevo Blog creado;
-      console.log("los valores  son ", nuevosValores);
+    // Combina los valores del formulario con el contenido del editor
+    const nuevosValores = { ...values, contenido: contenidoEditor };
+    
+    // Aqui se encuentran los valores que van a la base de datos del nuevo Blog creado;
+    console.log("los valores  son ", nuevosValores);
+    // const {dataPeli} = await axios.post('http://localhost:8000/peliculas/', {
+    //     nuevosValores
+    // }, {
+    //     headers: {
+    //         accept: "application/json",
+    //     }
+    //   }
+    // )
 
       // Limpiar el formulario después de enviar
       resetForm();

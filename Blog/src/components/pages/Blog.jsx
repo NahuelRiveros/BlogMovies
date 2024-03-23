@@ -33,9 +33,8 @@ const Blog = () => {
           <div key={index} className="cursor-pointer p-5 shadow-lg rounded">
             <h1 className="font-haken font-bold text-[22px]">{items.nombrePelicula}</h1>
             <div onClick={()=>handleDetalles(items)}>
-            {console.log(items)}
-            <img src={`data:image/png;base64,${items.imagen}`} alt="Poster Pelicula"className="rounded-3xl "/>
-            {/* <img src={`https://image.tmdb.org/t/p/w500/${items.backdrop_path}`} alt={items.backdrop_path} className="rounded-3xl "/> */}
+            {console.log(items.imagen)}
+            <img src={`data:image/jpeg;base64,${items.imagen}`} alt="Poster Pelicula"className="rounded-3xl "/>
             </div>
             <h3 className="line-clamp-6 p-2">{items.descripcionPelicula}</h3>
             <p className="mb-2 text-gray-400"><FaUser className="inline-flex items-center mr-2"></FaUser>Autor</p>
