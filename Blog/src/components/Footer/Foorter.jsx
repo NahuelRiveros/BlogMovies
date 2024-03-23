@@ -35,7 +35,7 @@ function Footer() {
               </li>
               <li>
                 <Link
-                  to="/test"
+                  to="/NuevoBlog"
                   className="bg-orange-700 hover:bg-orange-600 text-white font-bold p-0.5  rounded-lg flex items-center gap-2"
                 >
                   Nuevo Post 
