@@ -1,16 +1,18 @@
 import { useState } from "react";
 import Nav from "./components/navbar/Nav";
-import SideBar from "./components/SideBar";
-import Footer from "./components/Footer";
 import { Link,Outlet,ScrollRestoration,createBrowserRouter,RouterProvider,Route,Routes } from "react-router-dom";
 import Login from "./components/Login/Login";
 import Blog from "./components/pages/Blog";
 import BlogMovie from "./components/pages/BlogMovie";
 import axios from "axios";
-import Comentario from "./components/pages/comments";
-import Comentarios from "./components/pages/comment";
 import AgregarBlog from "./components/pages/agregarBlog/newBlog";
-;
+import RegisterForm from "./components/Login/Registro";
+import Footer from "./components/Footer/Foorter";
+// import SideBar from "./components/SideBar";
+// import Footer from "./components/Footer";
+// import Comentario from "./components/pages/comments";
+// import Comentarios from "./components/pages/comment";
+
 //import rutas from "../../back-Blog/routes/routes";
 
 // Extraer peliculas
@@ -70,7 +72,7 @@ const Layout = () => {
       <ScrollRestoration />
       <Outlet />
       {/* //invetigar bien estas funciones */}
-      {/* <Footer /> */}
+      <Footer />
     </div>
   )
 }
@@ -91,6 +93,10 @@ const router = createBrowserRouter([
       },
       {path:'/test',
       element:<AgregarBlog/>}, 
+      {path:'/login',
+      element:<Login/>},
+      {path:"/registro",
+    element:<RegisterForm/>}
        
         // path:'/card',
         // element: <Pelicula/>
@@ -104,7 +110,7 @@ const router = createBrowserRouter([
 function App() {
 
   return (
-    <div >
+    <div className="" >
       <RouterProvider router={router} />
     </div>
 
