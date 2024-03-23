@@ -1,35 +1,37 @@
 import React, { useRef, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-
+import { IoReturnDownBackOutline } from "react-icons/io5";
+import { FaBackspace } from "react-icons/fa";
 import { Editor } from "@tinymce/tinymce-react";
-
+import { BsBack } from "react-icons/bs";
+import { Link } from "react-router-dom";
 const AgregarBlog = ({ onSubmit }) => {
   const editorRef = useRef(null); // Referencia al editor
   const [cargando, setCargando] = useState(false);
-  const [contenidoEditor, setContenidoEditor] = useState(""); // Estado para almacenar el contenido del editor
-
+  const backToMovie = () => {
+    navigate("/");
+  };
   const handleSubmit = (values, { resetForm }) => {
     setTimeout(() => {
-    //captura del text area
-    const contenidoEditor = editorRef.current
-      .getContent()
-      .replace(/<\/?p>/g, "");
+      //captura del text area
+      const contenidoEditor = editorRef.current
+        .getContent()
+        .replace(/<\/?p>/g, "");
 
-    // Combina los valores del formulario con el contenido del editor
-    const nuevosValores = { ...values, contenido: contenidoEditor };
-    
-    
-    // Aqui se encuentran los valores que van a la base de datos del nuevo Blog creado;
-    console.log("los valores  son ", nuevosValores);
+      // Combina los valores del formulario con el contenido del editor
+      const nuevosValores = { ...values, contenido: contenidoEditor };
 
-    // Limpiar el formulario después de enviar
-    resetForm();
-    if (editorRef.current) {
-      editorRef.current.setContent("");
-    }
-    // Restablecer el contenido del CKEditor a un valor predeterminado (por ejemplo, un texto vacío)
-    setCargando(false);
-  }, 2000);
+      // Aqui se encuentran los valores que van a la base de datos del nuevo Blog creado;
+      console.log("los valores  son ", nuevosValores);
+
+      // Limpiar el formulario después de enviar
+      resetForm();
+      if (editorRef.current) {
+        editorRef.current.setContent("");
+      }
+      // Restablecer el contenido del CKEditor a un valor predeterminado (por ejemplo, un texto vacío)
+      setCargando(false);
+    }, 2000);
   };
 
   //codigo text area
@@ -95,14 +97,24 @@ const AgregarBlog = ({ onSubmit }) => {
                   onInit={(evt, editor) => (editorRef.current = editor)}
                 />
               </div>
-              <div className="flex justify-center">
+              <div className="flex items-center  justify-center gap-5">
                 <button
                   type="submit"
                   disabled={cargando}
-                  className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 mt-4 "
+                  className="bg-blue-500 text-white  p-2 rounded hover:bg-blue-600"
                 >
-                  {cargando ? 'Cargando...' : 'Crear Blog'}
+                  {cargando ? "Cargando..." : "Crear Blog"}
                 </button>
+                <Link
+                  className="flex items-center transition duration-500 h-10 w-10 rounded-2xl bg-blue-500 text-white  p-2 hover:bg-blue-600"
+                  to={"/"}
+                >
+                  <FaBackspace
+                    className={`text-4xl cursor-pointer
+             hover:scale-110 transition-all
+             duration-100 rounded-2xl ease-in-out`}
+                  ></FaBackspace>
+                </Link>
               </div>
             </Form>
           )}
