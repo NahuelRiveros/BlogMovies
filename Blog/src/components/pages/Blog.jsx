@@ -19,7 +19,7 @@ const Blog = () => {
   useEffect(() => {
     // Filtrar los datos basados en el término de búsqueda
     const filtered = loadMovies.filter((item) =>
-      item.title.toLowerCase().includes(searchTerm.toLowerCase())
+      item.nombrePelicula.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredData(filtered);
   }, [searchTerm, loadMovies]);

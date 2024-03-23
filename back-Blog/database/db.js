@@ -9,7 +9,7 @@ const db = new Sequelize("PeliculasBlog", "postgres", "Hola1234", {
 //Sincronizar base de datos
 
 async function createTables() {
-    try { 
+    try {
         await db.sync({ alter: true });
         console.log("Tablas creadas en la base de datos.");
     } catch (error) {
