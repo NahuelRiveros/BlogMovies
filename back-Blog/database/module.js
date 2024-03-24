@@ -1,8 +1,6 @@
 import db from "./db.js";
 import { DataTypes } from 'sequelize';
 
-
-
 export const tbComentario = db.define(
     "comentario",
     {
@@ -55,6 +53,10 @@ export const tbPelicula = db.define(
             type: DataTypes.STRING(1064),
             allowNull: false,
         },
+        puntuacionGeneral: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
     },
     { freezeTableName: true }
 );
@@ -88,3 +90,40 @@ tbComentario.hasMany(tbComentarioPelicula, { foreignKey: { name: 'idComentario' 
 //pelicula a comentarioPelicula
 tbComentarioPelicula.belongsTo(tbPelicula, { foreignKey: { name: 'idPelicula' } });
 tbPelicula.hasMany(tbComentarioPelicula, { foreignKey: { name: 'idPelicula' } });
+
+tbComentario.addHook('afterCreate', async (comentario, options) => {
+    console.log("SE ESTA HACIENDO EL TRIGGER")
+    try {
+        const comentariosPelicula = await tbComentarioPelicula.findAll({ where: { idComentario: comentario.idComentario } });
+        console.log(comentariosPelicula)
+        const totalPuntuacion = comentariosPelicula.reduce((sum, cp) => sum + cp.comentario.puntuacion, 0);
+        console.log(totalPuntuacion)
+        const nuevaPuntuacionPromedio = totalPuntuacion / comentariosPelicula.length;
+        console.log(nuevaPuntuacionPromedio)
+        const pelicula = await tbPelicula.findByPk(comentariosPelicula[0].idPelicula);
+        console.log(pelicula)
+        if (pelicula) {
+            console.log()
+            await pelicula.update({ puntuacionGeneral: nuevaPuntuacionPromedio });
+        }
+    } catch (err) {
+        console.error(err);
+    }
+  });
+
+//   tbKilometro.addHook('afterCreate', async (kilometro, options) => {
+//     const usuario = await tbUser.findOne({ where: { dniUsuario: kilometro.fkUser } });
+//     const categoria = await tbCategoria.findOne({ where: { idCategoria: kilometro.fkCategoria } });
+//     const puntosKilometro = categoria.puntosCategoria * kilometro.kmRecorrido;
+//     const puntaje = await tbKMTotal.findOne({ where: { fkUser: usuario.dniUsuario } });
+//     if (puntaje) {
+//       console.log("se intento agregar el puntaje")
+//       puntaje.puntaje += puntosKilometro;
+//       await puntaje.save();
+//     } else {
+//       await tbKMTotal.create({
+//         fkUser: usuario.dniUsuario,
+//         puntaje: puntosKilometro
+//       });
+//     }
+//   });

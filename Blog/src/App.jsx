@@ -5,7 +5,7 @@ import Login from "./components/Login/Login";
 import Blog from "./components/pages/Blog";
 import BlogMovie from "./components/pages/BlogMovie";
 import axios from "axios";
-import AgregarBlog from "./components/pages/agregarBlog/newBlog";
+import AgregarPelicula from "./components/pages/agregarBlog/newBlog";
 import RegisterForm from "./components/Login/Registro";
 import Footer from "./components/Footer/Foorter";
 // import SideBar from "./components/SideBar";
@@ -92,7 +92,7 @@ const router = createBrowserRouter([
         element: <BlogMovie />
       },
       {path:'/NuevoBlog',
-      element:<AgregarBlog/>}, 
+      element:<AgregarPelicula/>}, 
       {path:'/login',
       element:<Login/>},
       {path:"/registro",
