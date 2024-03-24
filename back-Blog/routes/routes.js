@@ -8,7 +8,7 @@ const rutas = express.Router();
 
 rutas.post('/peliculas/', upload.single("posterPelicula"),async (req,res) => {
     console.log("ENTRO RUTAS")
-    console.log(req)
+    console.log(req.file)
     const fileTemPath = req.file.path
     const fileContent = fs.readFileSync(fileTemPath);
     try {
