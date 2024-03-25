@@ -19,5 +19,5 @@ try {
     console.error("Unable to connect to the database:", err);
 }
 app.listen(port, (req, res) => {
-    console.log(`sever esta corriendo en http://localhost:${port}/`);
+    console.log(`server esta corriendo en http://localhost:${port}/`);
 });

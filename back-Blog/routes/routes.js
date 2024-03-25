@@ -2,19 +2,33 @@ import express from 'express';
 import { AddPelicula,AddComentario,AddComentarioPelicula,listPeliculas,listComentarios,listComentariosPelis } from '../controller/controllers.js';
 import multer from "multer"
 import fs from "fs"
-const upload = multer ({dest: "uploads/"})
+import { tbPelicula } from "../database/module.js"
+
+const upload = multer({ dest: "uploads/" });
+
+// const storage = multer.diskStorage({
+//     destination: function (req, file, cb) {
+//         cb(null, '/uploads'); // Directorio de destino donde se guardarán los archivos
+//     },
+//     filename: function (req, file, cb) {
+//         cb(null, Date.now() + '-' + file.originalname); // Nombre del archivo
+//     }
+//     });
+//     const upload = multer({ storage: storage });
 
 const rutas = express.Router();
 
 rutas.post('/peliculas/', upload.single("image"),async (req,res) => {
-    const fileTemPath = req.file.path
-    const fileContent = fs.readFileSync(fileTemPath);
+    console.log(req.body);
+    const fileTemPath =  req.file.path;
+    const fileData = fs.readFileSync(fileTemPath);
+    const { titulo, descripcion } = req.body;
     try {
-        const { tema, descripcion } = req.body;
-        const AddingCat = await tbPelicula.create({ nombrePelicula:tema, posterPelicula:fileContent, descripcionPelicula:descripcion });
+        const AddingCat = await tbPelicula.create({ nombrePelicula:titulo, posterPelicula:fileData, descripcionPelicula:descripcion, puntuacionGeneral:0 });
+        fs.unlinkSync(fileTemPath);
         res.json({ msg: "Creado correctamente" });
     } catch (err) {
-        res.json({ msg: err.message });
+        console.log("hola", "  ", err.message);
     }
 })
 rutas.post('/comentarios/', AddComentario);

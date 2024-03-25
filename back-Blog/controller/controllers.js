@@ -3,11 +3,12 @@ import {tbComentario,tbPelicula,tbComentarioPelicula} from "../database/module.j
 import fs from "fs";
 
 export const AddPelicula = async (req, res) => {
+    console.log("ENTRO CONTROLLER")
     const fileTemPath = req.file.path
     const fileContent = fs.readFileSync(fileTemPath);
     try {
-        const { tema, descripcion } = req.body;
-        const AddingCat = await tbPelicula.create({ nombrePelicula:tema, posterPelicula:fileContent, descripcionPelicula:descripcion });
+        const { tema, descripcion, puntuacionG } = req.body;
+        const AddingCat = await tbPelicula.create({ nombrePelicula:tema, posterPelicula:fileContent, descripcionPelicula:descripcion, puntuacionGeneral:0 });
         res.json({ msg: "Creado correctamente" });
     } catch (err) {
         res.json({ msg: err.message });

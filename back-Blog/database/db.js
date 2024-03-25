@@ -1,6 +1,11 @@
 import Sequelize from "sequelize";
 
-const db = new Sequelize("PeliculasBlog", "postgres", "Hola1234", {
+const db = new Sequelize(
+    "Blog", 
+    "postgres", 
+    "04211997a",
+    //"hola1234"
+    {
     host: "localhost",
     dialect:
         "postgres" /* one of 'mysql' | 'postgres' | 'sqlite' | 'mariadb' | 'mssql' | 'db2' | 'snowflake' | 'oracle' */,
@@ -10,7 +15,7 @@ const db = new Sequelize("PeliculasBlog", "postgres", "Hola1234", {
 
 async function createTables() {
     try {
-        await db.sync({ alter: true });
+        await db.sync({ alter: true }); 
         console.log("Tablas creadas en la base de datos.");
     } catch (error) {
         console.error("Error al crear las tablas:", error);
@@ -18,7 +23,7 @@ async function createTables() {
     // finally {
     //     db.close();
     // }
-};
+}; 
 
 db.sync({alter: true});
 
