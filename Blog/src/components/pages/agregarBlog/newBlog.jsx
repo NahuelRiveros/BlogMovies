@@ -1,13 +1,51 @@
 import React, { useState } from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field } from "formik";
 import { Link } from "react-router-dom";
 import { FaBackspace } from "react-icons/fa";
 import axios from "axios";
+import axios from "axios";
 
-const AgregarPelicula = ({ onSubmit }) => {
+// Función para convertir la imagen a base64
+const convertImageToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+        if (!file) {
+            reject("No se ha seleccionado ningún archivo.");
+        }
+
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+
+        reader.onload = () => {
+            resolve(reader.result);
+        };
+
+        reader.onerror = (error) => {
+            reject("Error al convertir la imagen a base64: " + error);
+        };
+    });
+};
+
+const AgregarPelicula = () => {
     const uri="http://localhost:8000/peliculas/";
     const [cargando, setCargando] = useState(false);
     const [previewImage, setPreviewImage] = useState(null);
+
+    // Manejar la subida de la imagen
+    const handleImageChange = async (event, setFieldValue) => {
+        const file = event.currentTarget.files[0];
+        try {
+            const base64 = await convertImageToBase64(file);
+            setFieldValue("image", base64); // Establecer el valor del campo "image" en base64
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const config = {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    };
     const handleSubmit = async (values, { resetForm }) => {
         console.log(JSON.stringify(values,null,2))
         setTimeout(async () => {
@@ -19,7 +57,8 @@ const AgregarPelicula = ({ onSubmit }) => {
             // Limpiar el formulario después de enviar
             resetForm();
             setCargando(false);
-      }, 2000);
+            resetForm();
+        }, 2000);
     };
     const handleImageChange = (event) => {
         const file = event.currentTarget.files[0];
