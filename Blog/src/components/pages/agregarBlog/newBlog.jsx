@@ -20,7 +20,7 @@ const AgregarBlog = ({ onSubmit }) => {
       // .replace(/<\/?p>/g, "");
 
     // Combina los valores del formulario con el contenido del editor
-    const nuevosValores = { ...values, contenido: contenidoEditor };
+    const nuevosValores = { ...values};
     
     // Aqui se encuentran los valores que van a la base de datos del nuevo Blog creado;
     console.log("los valores  son ", nuevosValores);
