@@ -1,6 +1,6 @@
 import Sequelize from "sequelize";
 
-const db = new Sequelize("Blog", "postgres", "04211997a", {
+const db = new Sequelize("PeliculasBlog", "postgres", "Hola1234", {
     host: "localhost",
     dialect:
         "postgres" /* one of 'mysql' | 'postgres' | 'sqlite' | 'mariadb' | 'mssql' | 'db2' | 'snowflake' | 'oracle' */,
