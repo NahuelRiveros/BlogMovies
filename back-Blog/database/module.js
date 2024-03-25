@@ -46,7 +46,7 @@ export const tbPelicula = db.define(
             allowNull: false,
         },
         posterPelicula: {
-            type: DataTypes.BLOB,
+            type: DataTypes.STRING,
             allowNull: true,
         },
         descripcionPelicula: {
