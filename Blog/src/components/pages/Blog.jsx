@@ -33,7 +33,7 @@ const Blog = () => {
       .toLowerCase()
       .split(" ")
       .join("");
-    console.log("aasdadsa",pMovie);
+  
     localStorage.setItem("id",pMovie.idPelicula)
     navigate(`/pelicula/${direccion}`, {
       state: {

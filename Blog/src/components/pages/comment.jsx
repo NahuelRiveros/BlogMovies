@@ -17,13 +17,13 @@ const Comentarios = () => {
   useEffect(() => {
     setUserData({"id":localStorage.getItem("ID"),"usuario":localStorage.getItem("usuario")})
   }, [])
-  
+  const IdBlog= localStorage.getItem("id")
   const handleSubmit = async (values, { resetForm }) => {
     console.log('Nuevo comentario:', values.comentario, values.puntuacion);
     
     if (User.usuario) {
       const nuevoComentario = {
-        //id: User.id,
+        idPelicula: IdBlog,
         comentarioCompleto: values.comentario,
         // autor: {
         //   nombre: User.usuario,
