@@ -1,9 +1,8 @@
 import Sequelize from "sequelize";
 
 const db = new Sequelize(
-    "PeliculasBlog", 
-    "postgres", 
-    //"04211997a",
+    "Blog", 
+    "postgres",
     //"hola1234"
     "123456789",
     {
