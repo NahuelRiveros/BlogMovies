@@ -33,7 +33,8 @@ const Blog = () => {
       .toLowerCase()
       .split(" ")
       .join("");
-    console.log(pMovie);
+    console.log("aasdadsa",pMovie);
+    localStorage.setItem("id",pMovie.idPelicula)
     navigate(`/pelicula/${direccion}`, {
       state: {
         item: pMovie,
@@ -49,6 +50,7 @@ const Blog = () => {
         {filteredData.map((item) => (
           
           <div key={item.idPelicula} className="cursor-pointer p-5 shadow-lg rounded-md bg-white hover:bg-gray-100 transition duration-300">
+        
           <h1 className="font-bold text-xl mb-2">{item.nombrePelicula}</h1>
           <div onClick={() => handleDetalles(item)} className="relative">
             <img src={`data:image/png;base64,${item.imagen}`} alt="Poster Pelicula" className="rounded-md w-full" />

@@ -7,19 +7,21 @@ import Puntuacion from './agregarBlog/puntuacionBlog/puntuacionBlog';
 function BlogMovie() {
     const navigate = useNavigate();
     const [movieDetalle, setMovieDetalle] = useState({});
-   
+    
     const MovieSelect = useLocation();
 
     useEffect(() => {
         setMovieDetalle(MovieSelect.state.item);
-        
     }, [MovieSelect.state.item]);
+    const IdBlog= localStorage.getItem("id")
 
     const backToMovie = () => {
         navigate("/");
     };
-    console.log(movieDetalle)
     
+
+    console.log(movieDetalle)
+    console.log(IdBlog)
 
    
 
