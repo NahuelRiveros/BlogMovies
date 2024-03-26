@@ -2,11 +2,21 @@ import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { PiEyeSlashFill } from "react-icons/pi";
 import { IoEyeSharp } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 function Login() {
   const [showPass, setShowPass] = useState(false);
+
+  const navigate = useNavigate()
+   const backToMovie = () => {
+        navigate("/");
+    }; 
+
+  function generateRandomId() {
+    // Generar un número aleatorio entre 1000 y 9999
+    return Math.floor(Math.random() * 9000) + 1000;
+  }
 
   return (
     <div className="flex h-screen justify-center items-center bg-gray-100">
@@ -29,9 +39,12 @@ function Login() {
               // alert(JSON.stringify(values, null, 2));
               // console.log("Valores del formulario:", values);
               console.log(values)
-
+              localStorage.setItem("usuario", values.username )
+              localStorage.setItem("ID",generateRandomId())
               setSubmitting(false);
               resetForm()
+              backToMovie()
+              
             }, 400);
           }}
         >

@@ -47,7 +47,8 @@ const Blog = () => {
       {/* Buscado de peliculas por nombre */}
       <div className=" text-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-4 m-4 gap-4  ">
         {filteredData.map((item) => (
-          <div key={item.id} className="cursor-pointer p-5 shadow-lg rounded-md bg-white hover:bg-gray-100 transition duration-300">
+          
+          <div key={item.idPelicula} className="cursor-pointer p-5 shadow-lg rounded-md bg-white hover:bg-gray-100 transition duration-300">
           <h1 className="font-bold text-xl mb-2">{item.nombrePelicula}</h1>
           <div onClick={() => handleDetalles(item)} className="relative">
             <img src={`data:image/png;base64,${item.imagen}`} alt="Poster Pelicula" className="rounded-md w-full" />

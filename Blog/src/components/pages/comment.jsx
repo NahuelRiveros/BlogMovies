@@ -1,31 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Formik, Form, Field } from 'formik';
 import Comentario from './comments';
 
 const Comentarios = () => {
   const [comentarios, setComentarios] = useState([]);
   const [MiText, setMiText] = useState("")
+  const [User, setUserData] = useState("")
   const handleEditorChange = (content,editor) =>{
     setMiText(content)
     onchange(content)
     console.log('conteniudo',content)}
-
+    localStorage.getItem("username")
+//AQUI SE CARGA LOS DATOS DEL LOGEO
+  useEffect(() => {
+    setUserData({"id":localStorage.getItem("ID"),"usuario":localStorage.getItem("usuario")})
+  }, [])
+  
   const handleSubmit = (values, { resetForm }) => {
     console.log('Nuevo comentario:', values.comentario);
-    const nuevoComentario = {
-      id: Date.now(),
-      contenido: values.comentario,
-      autor: {
-        nombre: 'Rios Anahi',
-        imagen: 'https://via.placeholder.com/50',
-      },
-      fecha: new Date().toLocaleString(),
-      liked: false,
-    };
-    console.log(nuevoComentario)
-    setComentarios([...comentarios, nuevoComentario]);
-    resetForm();
-  };
+    if (User.usuario) {
+      const nuevoComentario = {
+        id: User.id,
+        contenido: values.comentario,
+        autor: {
+          nombre: User.usuario,
+          imagen: 'https://via.placeholder.com/50',
+        },
+        fecha: new Date().toLocaleString(),
+        liked: false,
+      };
+      console.log(nuevoComentario)
+      setComentarios([...comentarios, nuevoComentario]);
+      resetForm();
+    }else{
+      alert("Debes logearte")
+    }
+    }
 
   const handleLike = (id) => {
     console.log('Cambio de like en comentario con ID:', id);

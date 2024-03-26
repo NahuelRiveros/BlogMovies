@@ -7,10 +7,7 @@ import Puntuacion from './agregarBlog/puntuacionBlog/puntuacionBlog';
 function BlogMovie() {
     const navigate = useNavigate();
     const [movieDetalle, setMovieDetalle] = useState({});
-    const [likes, setLikes] = useState(0);
-    const [dislikes, setDislikes] = useState(0);
-    const [hasLiked, setHasLiked] = useState(false);
-    const [hasDisliked, setHasDisliked] = useState(false);
+   
     const MovieSelect = useLocation();
 
     useEffect(() => {
@@ -21,7 +18,7 @@ function BlogMovie() {
     const backToMovie = () => {
         navigate("/");
     };
-
+    console.log(movieDetalle)
     
 
    
@@ -30,7 +27,7 @@ function BlogMovie() {
         <div className="container mx-auto px-4 py-8">
             <div className="max-w-screen-lg mx-auto flex flex-col md:flex-row gap-10 justify-center items-center">
                 <div className="w-full md:w-1/2 relative -z-10">
-                    <img className="w-full  h-auto object-cover rounded-lg" src={movieDetalle.imagen} alt="Poster Pelicula" />
+                    <img className="w-full  h-auto object-cover rounded-lg" src={`data:image/png;base64,${movieDetalle.imagen}`} alt="Poster Pelicula" />
                     <div className="absolute -z-10 top-0 right-0 bg-black text-white font-semibold py-1 px-4 rounded-b-lg">
                         Género
                     </div>
@@ -41,10 +38,10 @@ function BlogMovie() {
                         <p className="text-lg">Detalles adicionales aquí...</p>
                     </div>
                     <div className="text-center">
-                        <p className="text-lg text-gray-600">Estreno: {movieDetalle.release_date}</p>
-                        <p className="text-lg text-gray-600">Popularidad: {movieDetalle.popularity}</p>
+                        <p className="text-lg text-gray-600">Estreno: {movieDetalle.descripcionPelicula}</p>
+                        <p className="text-lg text-gray-600">Popularidad: {movieDetalle.puntuacionGeneral}</p>
                     </div>
-                    <p className="text-lg text-gray-700">{movieDetalle.descripcionPelicula}</p>
+                    <p className="text-lg text-gray-700">{movieDetalle.createdAt}</p>
                     <div className="flex justify-center items-center gap-10">
                         <button className="flex justify-center items-center w-10 h-10 rounded-full bg-gray-200 hover:bg-gray-300" onClick={backToMovie}>
                             <IoReturnDownBackOutline className="text-xl" />
