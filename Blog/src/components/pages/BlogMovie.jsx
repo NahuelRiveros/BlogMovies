@@ -37,7 +37,7 @@ function BlogMovie() {
                 <div className="w-full md:w-1/2 flex flex-col justify-center gap-8">
                     <h2 className="text-3xl md:text-4xl font-bold text-center">{movieDetalle.nombrePelicula}</h2>
                     <div className="text-center">
-                        <p className="text-lg"> {IdBlog} Detalles adicionales aquí...</p>
+                        <p className="text-lg"> {movieDetalle.descripcionPelicula} </p>
                     </div>
                     <div className="text-center">
                         <p className="text-lg text-gray-600">Estreno: {movieDetalle.descripcionPelicula}</p>
