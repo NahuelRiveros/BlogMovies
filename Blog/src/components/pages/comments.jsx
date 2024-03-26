@@ -6,8 +6,24 @@ import { AiOutlineDislike } from "react-icons/ai";
 import { AiOutlineLike } from "react-icons/ai";
 import React from 'react';
 import Puntuacion from './agregarBlog/puntuacionBlog/puntuacionBlog';
+import { FaStar, FaStarHalfAlt } from 'react-icons/fa';
 const Comentario = ({ comentario, onLike }) => {
   console.log('Información del comentario:', comentario);
+  const renderStars = () => {
+    const rating = comentario.puntuacion;
+    
+    const starArray = [];
+    for (let i = 1; i <= 5; i++) {
+      if (i <= rating) {
+        starArray.push(<FaStar key={i} className="text-yellow-500" />);
+      } else if (i - 0.5 <= rating) {
+        starArray.push(<FaStarHalfAlt key={i} className="text-yellow-500" />);
+      } else {
+        starArray.push(<FaStar key={i} className="text-gray-400" />);
+      }
+    }
+    return starArray;
+  };
 
   return (
     <div>
@@ -28,9 +44,9 @@ const Comentario = ({ comentario, onLike }) => {
         <p>{comentario.contenido}</p>
         <p
           
-          className="text-gray-500 cursor-pointer hover:text-blue-500 focus:outline-none"
+          className="text-gray-500 cursor-pointer hover:text-blue-500 focus:outline-none flex"
         >
-         Puntuacion : {comentario.puntuacion}
+         {renderStars()}
           
         </p>
       </div>

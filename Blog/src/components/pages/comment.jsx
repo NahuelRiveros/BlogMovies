@@ -5,6 +5,7 @@ import Comentario from './comments';
 const Comentarios = () => {
   const [comentarios, setComentarios] = useState([]);
   const [MiText, setMiText] = useState("")
+  
   const [User, setUserData] = useState("")
   const handleEditorChange = (content,editor) =>{
     setMiText(content)
@@ -18,6 +19,7 @@ const Comentarios = () => {
   
   const handleSubmit = (values, { resetForm }) => {
     console.log('Nuevo comentario:', values.comentario, values.puntuacion);
+    
     if (User.usuario) {
       const nuevoComentario = {
         id: User.id,
@@ -54,7 +56,6 @@ const Comentarios = () => {
       >
         {({ handleSubmit }) => (
           <Form className='flex flex-col items-center justify-center' onSubmit={handleSubmit}>
-            <div className='flex gap-5'>
 
             <Field
               as="textarea"
@@ -63,19 +64,22 @@ const Comentarios = () => {
               placeholder="Escribe tu comentario..."
                
             />
+            
             <div className='flex flex-col'>
-            <label htmlFor="" className='text-center'> Puntuacion </label>
-            <Field
-              min={0}
-              max={5}
-              type='number'
-              name="puntuacion"
-              className="  w-12  p-2 mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 "
-              placeholder="Escribe tu comentario..."
-               
-            />
+            <label htmlFor="puntuacion" className='text-center'>Puntuacion</label>
+                <Field
+                  id="puntuacion"
+                  name="puntuacion"
+                  as="select"
+                  className="w-full p-2 mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                >
+                  <option value="">Seleccionar</option>
+                  {[1, 2, 3, 4, 5].map(score => (
+                    <option key={score} value={score}>{score}</option>
+                  ))}
+                </Field>
             </div>
-            </div>
+            
 
             <button
               type="submit"
