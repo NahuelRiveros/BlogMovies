@@ -5,7 +5,7 @@ import { user } from '../../assets/img';
 import { AiOutlineDislike } from "react-icons/ai";
 import { AiOutlineLike } from "react-icons/ai";
 import React from 'react';
-
+import Puntuacion from './agregarBlog/puntuacionBlog/puntuacionBlog';
 const Comentario = ({ comentario, onLike }) => {
   console.log('Información del comentario:', comentario);
 
@@ -26,15 +26,13 @@ const Comentario = ({ comentario, onLike }) => {
           <span className="text-gray-500">{comentario.fecha}</span>
         </div>
         <p>{comentario.contenido}</p>
-        <button
-          onClick={() => {
-            onLike(comentario.id);
-            console.log('Botón Like clickeado');
-          }}
-          className="text-gray-500 hover:text-blue-500 focus:outline-none"
+        <p
+          
+          className="text-gray-500 cursor-pointer hover:text-blue-500 focus:outline-none"
         >
-          {comentario.liked ? 'Unlike' : 'Like'}
-        </button>
+         Puntuacion : {comentario.puntuacion}
+          
+        </p>
       </div>
     </div>
      

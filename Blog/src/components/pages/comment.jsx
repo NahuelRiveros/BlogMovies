@@ -17,7 +17,7 @@ const Comentarios = () => {
   }, [])
   
   const handleSubmit = (values, { resetForm }) => {
-    console.log('Nuevo comentario:', values.comentario);
+    console.log('Nuevo comentario:', values.comentario, values.puntuacion);
     if (User.usuario) {
       const nuevoComentario = {
         id: User.id,
@@ -27,7 +27,7 @@ const Comentarios = () => {
           imagen: 'https://via.placeholder.com/50',
         },
         fecha: new Date().toLocaleString(),
-        liked: false,
+        puntuacion: values.puntuacion,
       };
       console.log(nuevoComentario)
       setComentarios([...comentarios, nuevoComentario]);
@@ -50,9 +50,12 @@ const Comentarios = () => {
   return (
     <div className=''>
       
-      <Formik initialValues={{ comentario: '' }} onSubmit={handleSubmit}>
+      <Formik initialValues={{ comentario: '', puntuacion: "" }} onSubmit={handleSubmit}
+      >
         {({ handleSubmit }) => (
           <Form className='flex flex-col items-center justify-center' onSubmit={handleSubmit}>
+            <div className='flex gap-5'>
+
             <Field
               as="textarea"
               name="comentario"
@@ -60,6 +63,20 @@ const Comentarios = () => {
               placeholder="Escribe tu comentario..."
                
             />
+            <div className='flex flex-col'>
+            <label htmlFor="" className='text-center'> Puntuacion </label>
+            <Field
+              min={0}
+              max={5}
+              type='number'
+              name="puntuacion"
+              className="  w-12  p-2 mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 "
+              placeholder="Escribe tu comentario..."
+               
+            />
+            </div>
+            </div>
+
             <button
               type="submit"
               className=" bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"

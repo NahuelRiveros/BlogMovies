@@ -50,7 +50,7 @@ function BlogMovie() {
                 </div>
             </div>
             <div className="flex justify-center items-center gap-4">
-            <Puntuacion></Puntuacion>
+            
             </div>
             <div className="my-8">
                 <label className="bg-black text-white font-bold text-lg py-4 px-8 rounded-t-lg block text-center">Comentarios</label>
