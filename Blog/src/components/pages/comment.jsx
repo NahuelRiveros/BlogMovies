@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Formik, Form, Field } from 'formik';
 import Comentario from './comments';
+import axios from "axios";
 
 const Comentarios = () => {
   const [comentarios, setComentarios] = useState([]);
   const [MiText, setMiText] = useState("")
-  
   const [User, setUserData] = useState("")
+  const URI = "http://localhost:8000/comentarios/"
   const handleEditorChange = (content,editor) =>{
     setMiText(content)
     onchange(content)
@@ -17,20 +18,28 @@ const Comentarios = () => {
     setUserData({"id":localStorage.getItem("ID"),"usuario":localStorage.getItem("usuario")})
   }, [])
   
-  const handleSubmit = (values, { resetForm }) => {
+  const handleSubmit = async (values, { resetForm }) => {
     console.log('Nuevo comentario:', values.comentario, values.puntuacion);
     
     if (User.usuario) {
       const nuevoComentario = {
-        id: User.id,
-        contenido: values.comentario,
-        autor: {
-          nombre: User.usuario,
-          imagen: 'https://via.placeholder.com/50',
-        },
-        fecha: new Date().toLocaleString(),
+        //id: User.id,
+        comentarioCompleto: values.comentario,
+        // autor: {
+        //   nombre: User.usuario,
+        //   imagen: 'https://via.placeholder.com/50',
+        // },
+        nombreAutor: User.usuario,
+        fechaComentario: new Date().toLocaleString(),
         puntuacion: values.puntuacion,
       };
+
+      try {
+        const response = await axios.post(URI, nuevoComentario)
+        alert("Comentario creado")
+      } catch(err) {
+        console.log(err.message)
+      }
       console.log(nuevoComentario)
       setComentarios([...comentarios, nuevoComentario]);
       resetForm();

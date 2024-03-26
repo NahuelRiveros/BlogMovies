@@ -27,7 +27,8 @@ export const AddComentario = async (req, res) => {
 
 export const AddComentarioPelicula = async (req, res) => {
     try {
-        const { idPelicula, idComentario } = req.body;
+        const ultimoComentarioId = await tbComentario.max("idComentario")
+        const { idPelicula } = req.body;
         const AddingCat = await tbComentarioPelicula.create({ idPelicula, idComentario });
         res.json({ msg: "Creado correctamente" });
     } catch (err) {
@@ -46,7 +47,7 @@ export const listPeliculas = async (req, res) => {
             return peliculaD;
         });
         return res.json({jsonPeli:listaPeliImagen});
-        res.json({ msg: "Creado correctamente" });
+        //res.json({ msg: "Creado correctamente" });
     } catch (err) {
         res.json({ msg: err.message });
     }
