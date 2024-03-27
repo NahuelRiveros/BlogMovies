@@ -7,19 +7,21 @@ import Puntuacion from './agregarBlog/puntuacionBlog/puntuacionBlog';
 function BlogMovie() {
     const navigate = useNavigate();
     const [movieDetalle, setMovieDetalle] = useState({});
-   
+    
     const MovieSelect = useLocation();
 
     useEffect(() => {
         setMovieDetalle(MovieSelect.state.item);
-        
     }, [MovieSelect.state.item]);
+    const IdBlog= localStorage.getItem("id")
 
     const backToMovie = () => {
         navigate("/");
     };
-    console.log(movieDetalle)
     
+
+    console.log(movieDetalle)
+    console.log(IdBlog)
 
    
 
@@ -35,7 +37,7 @@ function BlogMovie() {
                 <div className="w-full md:w-1/2 flex flex-col justify-center gap-8">
                     <h2 className="text-3xl md:text-4xl font-bold text-center">{movieDetalle.nombrePelicula}</h2>
                     <div className="text-center">
-                        <p className="text-lg">Detalles adicionales aquí...</p>
+                        <p className="text-lg"> {movieDetalle.descripcionPelicula} </p>
                     </div>
                     <div className="text-center">
                         <p className="text-lg text-gray-600">Estreno: {movieDetalle.descripcionPelicula}</p>
@@ -50,7 +52,7 @@ function BlogMovie() {
                 </div>
             </div>
             <div className="flex justify-center items-center gap-4">
-            <Puntuacion></Puntuacion>
+            
             </div>
             <div className="my-8">
                 <label className="bg-black text-white font-bold text-lg py-4 px-8 rounded-t-lg block text-center">Comentarios</label>

@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Formik, Form, Field } from 'formik';
 import Comentario from './comments';
+import axios from "axios";
 
 const Comentarios = () => {
   const [comentarios, setComentarios] = useState([]);
   const [MiText, setMiText] = useState("")
   const [User, setUserData] = useState("")
+  const URI = "http://localhost:8000/comentarios/"
   const handleEditorChange = (content,editor) =>{
     setMiText(content)
     onchange(content)
@@ -15,20 +17,29 @@ const Comentarios = () => {
   useEffect(() => {
     setUserData({"id":localStorage.getItem("ID"),"usuario":localStorage.getItem("usuario")})
   }, [])
-  
-  const handleSubmit = (values, { resetForm }) => {
-    console.log('Nuevo comentario:', values.comentario);
+  const IdBlog= localStorage.getItem("id")
+  const handleSubmit = async (values, { resetForm }) => {
+    console.log('Nuevo comentario:', values.comentario, values.puntuacion);
+    
     if (User.usuario) {
       const nuevoComentario = {
-        id: User.id,
-        contenido: values.comentario,
-        autor: {
-          nombre: User.usuario,
-          imagen: 'https://via.placeholder.com/50',
-        },
-        fecha: new Date().toLocaleString(),
-        liked: false,
+        idPelicula: IdBlog,
+        comentarioCompleto: values.comentario,
+        // autor: {
+        //   nombre: User.usuario,
+        //   imagen: 'https://via.placeholder.com/50',
+        // },
+        nombreAutor: User.usuario,
+        fechaComentario: new Date().toLocaleString(),
+        puntuacion: values.puntuacion,
       };
+
+      try {
+        const response = await axios.post(URI, nuevoComentario)
+        alert("Comentario creado")
+      } catch(err) {
+        console.log(err.message)
+      }
       console.log(nuevoComentario)
       setComentarios([...comentarios, nuevoComentario]);
       resetForm();
@@ -50,9 +61,11 @@ const Comentarios = () => {
   return (
     <div className=''>
       
-      <Formik initialValues={{ comentario: '' }} onSubmit={handleSubmit}>
+      <Formik initialValues={{ comentario: '', puntuacion: "" }} onSubmit={handleSubmit}
+      >
         {({ handleSubmit }) => (
           <Form className='flex flex-col items-center justify-center' onSubmit={handleSubmit}>
+
             <Field
               as="textarea"
               name="comentario"
@@ -60,6 +73,23 @@ const Comentarios = () => {
               placeholder="Escribe tu comentario..."
                
             />
+            
+            <div className='flex flex-col'>
+            <label htmlFor="puntuacion" className='text-center'>Puntuacion</label>
+                <Field
+                  id="puntuacion"
+                  name="puntuacion"
+                  as="select"
+                  className="w-full p-2 mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                >
+                  <option value="">Seleccionar</option>
+                  {[1, 2, 3, 4, 5].map(score => (
+                    <option key={score} value={score}>{score}</option>
+                  ))}
+                </Field>
+            </div>
+            
+
             <button
               type="submit"
               className=" bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"

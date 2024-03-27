@@ -67,18 +67,7 @@ function Puntuacion() {
       </div>
       <div className="flex flex-col justify-center items-center gap-4">
         <div className="flex">
-          <button
-            onClick={handleLike}
-            className="flex justify-center items-center w-10 h-10 rounded-full bg-gray-200 hover:bg-gray-300"
-          >
-            👍
-          </button>
-          <button
-            onClick={handleDislike}
-            className="flex justify-center items-center w-10 h-10 rounded-full bg-gray-200 hover:bg-gray-300"
-          >
-            👎
-          </button>
+          <input value={"hola"} className="rounded-xl border text-center w-10 border-red-600 " type="text" />
         </div>
         <div className="flex items-center gap-1 text-yellow-500">
           {renderStars()}

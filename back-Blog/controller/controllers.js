@@ -17,23 +17,25 @@ export const AddPelicula = async (req, res) => {
 
 export const AddComentario = async (req, res) => {
     try {
-        const { nombreAutor, comentarioCompleto, fechaComentario, puntuacion } = req.body;
+        const { idPelicula, nombreAutor, comentarioCompleto, fechaComentario, puntuacion } = req.body;
         const AddingCat = await tbComentario.create({ nombreAutor, comentarioCompleto, fechaComentario, puntuacion });
+        const ultimoComentario = await tbComentario.max("idComentario")
+        const conexionTablas = await tbComentarioPelicula.create({idPelicula, idComentario:ultimoComentario})
         res.json({ msg: "Creado correctamente" });
     } catch (err) {
         res.json({ msg: err.message });
     }
 };
 
-export const AddComentarioPelicula = async (req, res) => {
-    try {
-        const { idPelicula, idComentario } = req.body;
-        const AddingCat = await tbComentarioPelicula.create({ idPelicula, idComentario });
-        res.json({ msg: "Creado correctamente" });
-    } catch (err) {
-        res.json({ msg: err.message });
-    }
-};
+// export const AddComentarioPelicula = async (req, res) => {
+//     try {
+//         const ultimoComentarioId = await tbComentario.max("idComentario")
+//         const AddingCat = await tbComentarioPelicula.create({ idPelicula, idComentario });
+//         res.json({ msg: "Creado correctamente" });
+//     } catch (err) {
+//         res.json({ msg: err.message });
+//     }
+// };
 
 export const listPeliculas = async (req, res) => {
     try {
@@ -46,7 +48,7 @@ export const listPeliculas = async (req, res) => {
             return peliculaD;
         });
         return res.json({jsonPeli:listaPeliImagen});
-        res.json({ msg: "Creado correctamente" });
+        //res.json({ msg: "Creado correctamente" });
     } catch (err) {
         res.json({ msg: err.message });
     }

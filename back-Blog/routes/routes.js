@@ -1,5 +1,5 @@
 import express from 'express';
-import { AddPelicula,AddComentario,AddComentarioPelicula,listPeliculas,listComentarios,listComentariosPelis } from '../controller/controllers.js';
+import { AddPelicula,AddComentario,listPeliculas,listComentarios,listComentariosPelis } from '../controller/controllers.js';
 import multer from "multer"
 import fs from "fs"
 import { tbPelicula } from "../database/module.js"
@@ -32,7 +32,7 @@ rutas.post('/peliculas/', upload.single("image"),async (req,res) => {
     }
 })
 rutas.post('/comentarios/', AddComentario);
-rutas.post('/comentariosPeliculas/', AddComentarioPelicula);
+//rutas.post('/comentariosPeliculas/', AddComentarioPelicula);
 rutas.get('/peliculasL/', listPeliculas);
 rutas.get('/comentariosL/', listComentarios);
 rutas.get('/comentariosPeliculasL/', listComentariosPelis);
