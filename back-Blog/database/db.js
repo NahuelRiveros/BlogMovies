@@ -3,9 +3,8 @@ import Sequelize from "sequelize";
 const db = new Sequelize(
     "PeliculasBlog", 
     "postgres", 
-    //"04211997a",
     //"hola1234"
-    "123456789",
+    "Hola1234",
     {
     host: "localhost",
     dialect:

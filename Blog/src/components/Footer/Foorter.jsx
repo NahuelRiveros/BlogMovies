@@ -46,9 +46,10 @@ function Footer() {
           {/* Sección 3: Contacto */}
           <div className="flex items-center flex-col">
             <h4 className="text-lg font-bold mb-4">Autores</h4>
-            <p className="text-sm hover:text-gray-400 hover:border-b-2 cursor-pointer">Anahi Rios</p>
-            <p className="text-sm hover:text-gray-400 hover:border-b-2 cursor-pointer">Aramis Mencia</p>
             <p className="text-sm hover:text-gray-400 hover:border-b-2 cursor-pointer">Bordon Raul</p>
+            <p className="text-sm hover:text-gray-400 hover:border-b-2 cursor-pointer">Machado Gaston</p>
+            <p className="text-sm hover:text-gray-400 hover:border-b-2 cursor-pointer">Mencia Aramis</p>
+            <p className="text-sm hover:text-gray-400 hover:border-b-2 cursor-pointer">Rios Anahi</p>
             <p className="text-sm hover:text-gray-400 hover:border-b-2 cursor-pointer">Riveros Nahuel</p>
           </div>
         </div>
