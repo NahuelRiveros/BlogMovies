@@ -70,7 +70,13 @@ export const listComentariosPelis = async (req, res) => {
         const listComentario = await tbComentario.findAll();
         return res.json({jsonComentarioPeli:listComentarioPeli,jsonComentario:listComentario});
         res.json({ msg: "Creado correctamente" });
-    } catch (err) {
+    } catch (err) {  
         res.json({ msg: err.message });
     }
-}
+} 
+
+
+
+
+
+

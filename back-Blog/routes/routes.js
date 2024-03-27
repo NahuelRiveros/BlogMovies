@@ -37,4 +37,4 @@ rutas.get('/peliculasL/', listPeliculas);
 rutas.get('/comentariosL/', listComentarios);
 rutas.get('/comentariosPeliculasL/', listComentariosPelis);
 
-export default rutas;
+export default rutas; 

@@ -5,9 +5,11 @@ import axios from "axios";
 
 const Comentarios = () => {
   const [comentarios, setComentarios] = useState([]);
+  const [apiComentarios, setapiComentarios] = useState([]);
   const [MiText, setMiText] = useState("")
   const [User, setUserData] = useState("")
   const URI = "http://localhost:8000/comentarios/"
+  const uriComentariosL ="http://localhost:8000/comentariosL/"
   const handleEditorChange = (content,editor) =>{
     setMiText(content)
     onchange(content)
@@ -16,7 +18,24 @@ const Comentarios = () => {
 //AQUI SE CARGA LOS DATOS DEL LOGEO
   useEffect(() => {
     setUserData({"id":localStorage.getItem("ID"),"usuario":localStorage.getItem("usuario")})
+    obtenerComentarios()
+    // setComentarios(axios.get(uriComentariosL))
   }, [])
+  console.log("a",comentarios)
+ 
+  const obtenerComentarios = async () => {
+    try {
+      const uriComentariosL = "http://localhost:8000/comentariosL/";
+      const response = await axios.get(uriComentariosL);
+      // console.log(response.data.jsonComentario)
+      setComentarios(response.data);
+    } catch (error) {
+      console.error('Error al obtener comentarios:', error);
+    }
+  }
+ 
+
+
   const IdBlog= localStorage.getItem("id")
   const handleSubmit = async (values, { resetForm }) => {
     console.log('Nuevo comentario:', values.comentario, values.puntuacion);
@@ -27,7 +46,7 @@ const Comentarios = () => {
         comentarioCompleto: values.comentario,
         // autor: {
         //   nombre: User.usuario,
-        //   imagen: 'https://via.placeholder.com/50',
+        // imagen: 'https://via.placeholder.com/50',
         // },
         nombreAutor: User.usuario,
         fechaComentario: new Date().toLocaleString(),
@@ -36,7 +55,7 @@ const Comentarios = () => {
 
       try {
         const response = await axios.post(URI, nuevoComentario)
-        alert("Comentario creado")
+        
       } catch(err) {
         console.log(err.message)
       }
@@ -100,9 +119,10 @@ const Comentarios = () => {
         )}
       </Formik>
       <div>
-        {comentarios.map((comentario) => (
-          <Comentario key={comentario.id} comentario={comentario} onLike={handleLike} />
-        ))}
+      {comentarios.jsonComentario && comentarios.jsonComentario.map((comentario, index) => (
+  <Comentario key={comentario.idComentario} comentario={comentario} onLike={handleLike} />
+))}
+         
       </div>
     </div>
   );

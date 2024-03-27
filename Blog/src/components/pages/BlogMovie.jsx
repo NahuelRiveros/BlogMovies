@@ -14,15 +14,15 @@ function BlogMovie() {
         setMovieDetalle(MovieSelect.state.item);
     }, [MovieSelect.state.item]);
     const IdBlog= localStorage.getItem("id")
+    
+
 
     const backToMovie = () => {
         navigate("/");
     };
     
 
-    console.log(movieDetalle)
-    console.log(IdBlog)
-
+    
    
 
     return (

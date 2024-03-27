@@ -7,7 +7,7 @@ import React from 'react';
 import Puntuacion from './agregarBlog/puntuacionBlog/puntuacionBlog';
 import { FaStar, FaStarHalfAlt } from 'react-icons/fa';
 const Comentario = ({ comentario, onLike }) => {
-  console.log('Información del comentario:', comentario);
+  
   const renderStars = () => {
     const rating = comentario.puntuacion;
     
