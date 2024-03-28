@@ -91,11 +91,24 @@ tbComentario.hasMany(tbComentarioPelicula, { foreignKey: { name: 'idComentario' 
 tbComentarioPelicula.belongsTo(tbPelicula, { foreignKey: { name: 'idPelicula' } });
 tbPelicula.hasMany(tbComentarioPelicula, { foreignKey: { name: 'idPelicula' } });
 
-tbComentario.addHook('afterCreate', async (comentario, options) => {
+tbComentarioPelicula.addHook('afterCreate', async (comentario, options) => {
     console.log("SE ESTA HACIENDO EL TRIGGER")
     try {
-        const comentariosPelicula = await tbComentarioPelicula.findAll({ where: { idComentario: comentario.idComentario } });
-        console.log(comentariosPelicula)
+        const ultimoComentarioId = await tbComentarioPelicula.max("idComentarioPelicula");
+        console.log(ultimoComentarioId)
+        const peliculaRequest = await tbComentarioPelicula.findAll({where:{idPelicula: ultimoComentarioId.idPelicula}})
+        const tamaño = length(peliculaRequest)
+        const peliculaRequest2 = await tbPelicula.findById({where:{idPelicula: ultimoComentarioId.idPelicula}})
+        const ultimoComentarioPuntuacion = await tbComentario.findById({where: {idComentario: ultimoComentarioId.idComentario}})
+        const tamañoAnterior = tamaño - 1
+
+
+
+
+
+
+
+
         const totalPuntuacion = comentariosPelicula.reduce((sum, cp) => sum + cp.comentario.puntuacion, 0);
         console.log(totalPuntuacion)
         const nuevaPuntuacionPromedio = totalPuntuacion / comentariosPelicula.length;

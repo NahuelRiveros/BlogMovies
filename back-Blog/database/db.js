@@ -1,10 +1,10 @@
 import Sequelize from "sequelize";
 
 const db = new Sequelize(
-    "PeliculasBlog", 
+    "Blog", 
     "postgres",
     //"hola1234"
-    "Hola1234",
+    "04211997a",
     {
     host: "localhost",
     dialect:
