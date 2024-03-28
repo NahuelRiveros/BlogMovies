@@ -17,15 +17,26 @@ export const AddPelicula = async (req, res) => {
 
 export const AddComentario = async (req, res) => {
     try {
-        const { idPelicula, nombreAutor, comentarioCompleto, fechaComentario, puntuacion } = req.body;
-        const AddingCat = await tbComentario.create({ nombreAutor, comentarioCompleto, fechaComentario, puntuacion });
-        const ultimoComentario = await tbComentario.max("idComentario")
-        const conexionTablas = await tbComentarioPelicula.create({idPelicula, idComentario:ultimoComentario})
-        res.json({ msg: "Creado correctamente" });
+        // Obtener datos del cuerpo de la solicitud
+        const { idPelicula, nombreAutor, comentarioCompleto, puntuacion } = req.body;
+
+        // Crear un nuevo comentario en la base de datos
+        const nuevoComentario = await tbComentario.create({ nombreAutor, comentarioCompleto, puntuacion });
+
+        // Obtener el ID del último comentario creado
+        const ultimoComentario = await tbComentario.max("idComentario");
+
+        // Crear una conexión entre la película y el nuevo comentario
+        await tbComentarioPelicula.create({ idPelicula, idComentario: ultimoComentario });
+
+        // Enviar respuesta de éxito al cliente
+        res.json({ success: true, msg: "Comentario agregado correctamente" });
     } catch (err) {
-        res.json({ msg: err.message });
+        // Enviar respuesta de error al cliente con un mensaje específico del error
+        res.status(500).json({ success: false, error: err.message });
     }
 };
+
 
 // export const AddComentarioPelicula = async (req, res) => {
 //     try {
@@ -57,7 +68,7 @@ export const listPeliculas = async (req, res) => {
 export const listComentarios = async (req, res) => {
     try {
         const listComentario = await tbComentario.findAll();
-        return res.json({jsonComentario:listComentario});
+        return res.json({listComentario});
         res.json({ msg: "Creado correctamente" });
     } catch (err) {
         res.json({ msg: err.message });

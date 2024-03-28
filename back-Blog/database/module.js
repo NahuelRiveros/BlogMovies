@@ -19,10 +19,6 @@ export const tbComentario = db.define(
             type: DataTypes.STRING(10000),
             allowNull: false,
         },
-        fechaComentario: {
-            type: DataTypes.DATEONLY,
-            allowNull: false,
-        },
         puntuacion: {
             type: DataTypes.INTEGER,
             allowNull: false,
