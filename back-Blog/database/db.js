@@ -4,7 +4,7 @@ const db = new Sequelize(
     "Blog", 
     "postgres",
     //"hola1234"
-    "04211997a",
+    "123456789",
     {
     host: "localhost",
     dialect:
