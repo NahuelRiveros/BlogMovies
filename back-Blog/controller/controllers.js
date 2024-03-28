@@ -26,8 +26,12 @@ export const AddComentario = async (req, res) => {
         // Obtener el ID del último comentario creado
         const ultimoComentario = await tbComentario.max("idComentario");
 
+        console.log("se creo el comentario")
+
         // Crear una conexión entre la película y el nuevo comentario
         await tbComentarioPelicula.create({ idPelicula, idComentario: ultimoComentario });
+
+        console.log("se creo la relacion")
 
         // Enviar respuesta de éxito al cliente
         res.json({ success: true, msg: "Comentario agregado correctamente" });

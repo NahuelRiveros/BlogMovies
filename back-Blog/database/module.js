@@ -50,7 +50,7 @@ export const tbPelicula = db.define(
             allowNull: false,
         },
         puntuacionGeneral: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.FLOAT,
             allowNull: false,
         },
     },
@@ -92,29 +92,20 @@ tbComentarioPelicula.addHook('afterCreate', async (comentario, options) => {
     try {
         const ultimoComentarioId = await tbComentarioPelicula.max("idComentarioPelicula");
         console.log(ultimoComentarioId)
-        const peliculaRequest = await tbComentarioPelicula.findAll({where:{idPelicula: ultimoComentarioId.idPelicula}})
-        const tamaño = length(peliculaRequest)
-        const peliculaRequest2 = await tbPelicula.findById({where:{idPelicula: ultimoComentarioId.idPelicula}})
-        const ultimoComentarioPuntuacion = await tbComentario.findById({where: {idComentario: ultimoComentarioId.idComentario}})
-        const tamañoAnterior = tamaño - 1
-
-
-
-
-
-
-
-
-        const totalPuntuacion = comentariosPelicula.reduce((sum, cp) => sum + cp.comentario.puntuacion, 0);
-        console.log(totalPuntuacion)
-        const nuevaPuntuacionPromedio = totalPuntuacion / comentariosPelicula.length;
-        console.log(nuevaPuntuacionPromedio)
-        const pelicula = await tbPelicula.findByPk(comentariosPelicula[0].idPelicula);
-        console.log(pelicula)
-        if (pelicula) {
-            console.log()
-            await pelicula.update({ puntuacionGeneral: nuevaPuntuacionPromedio });
-        }
+        const ultimoComentario = await tbComentarioPelicula.findByPk(ultimoComentarioId);
+        console.log(ultimoComentario, "/b", "se realizo con exito: p1")
+        const peliculaRequest = await tbComentarioPelicula.findAll({where:{idPelicula: ultimoComentario.idPelicula}})
+        console.log(peliculaRequest, "/b", "se realizo con exito: p2")
+        const tamaño = peliculaRequest.length
+        console.log(tamaño, "/b", "se realizo con exito: p3")
+        const pelicula = await tbPelicula.findByPk(ultimoComentario.idPelicula)
+        console.log(pelicula, "/b", "se realizo con exito: p4")
+        const ultimoComentarioPuntuacion = await tbComentario.findByPk(ultimoComentario.idComentario)
+        console.log(ultimoComentarioPuntuacion, "/b", "se realizo con exito: p5")
+        const puntuacionFinal = ((pelicula.puntuacionGeneral * (tamaño - 1)) + ultimoComentarioPuntuacion.puntuacion) / tamaño
+        console.log(puntuacionFinal, "/b", "se realizo con exito: p6")
+        const actualizarPuntuacion = await pelicula.update({puntuacionGeneral: puntuacionFinal})
+        return(console.log("Se ha realizado con exito"))
     } catch (err) {
         console.error(err);
     }
