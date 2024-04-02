@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { IoReturnDownBackOutline } from "react-icons/io5";
 import { FaThumbsUp, FaThumbsDown } from "react-icons/fa";
+import { FaStar, FaStarHalfAlt } from 'react-icons/fa';
 import Comentarios from './comment';
 import Puntuacion from './agregarBlog/puntuacionBlog/puntuacionBlog';
 function BlogMovie() {
@@ -14,16 +15,27 @@ function BlogMovie() {
         setMovieDetalle(MovieSelect.state.item);
     }, [MovieSelect.state.item]);
     const IdBlog= localStorage.getItem("id")
-    
-
 
     const backToMovie = () => {
         navigate("/");
     };
-    
 
-    
-   
+    const renderStars = () => {
+        const rating = movieDetalle.puntuacionGeneral;
+        const starArray = [];
+        for (let i = 1; i <= 5; i++) {
+          if (i <= rating) {
+            starArray.push(<FaStar key={i} className="text-yellow-500" />);
+          } else if (i - 0.5 <= rating) {
+            starArray.push(<FaStarHalfAlt key={i} className="text-yellow-500" />);
+          } else {
+            starArray.push(<FaStar key={i} className="text-gray-400" />);
+          }
+        }
+        return starArray;
+      };
+
+    {console.log(movieDetalle)}
 
     return (
         <div className="container mx-auto px-4 py-8">
@@ -41,7 +53,7 @@ function BlogMovie() {
                     </div>
                     <div className="text-center">
                         <p className="text-lg text-gray-600">Estreno: {movieDetalle.descripcionPelicula}</p>
-                        <p className="text-lg text-gray-600">Popularidad: {movieDetalle.puntuacionGeneral}</p>
+                        <p className="text-lg text-gray-600 flex justify-center items-center">Popularidad: {renderStars()}</p>
                     </div>
                     <p className="text-lg text-gray-700">{movieDetalle.createdAt}</p>
                     <div className="flex justify-center items-center gap-10">

@@ -7,10 +7,8 @@ import React from 'react';
 import Puntuacion from './agregarBlog/puntuacionBlog/puntuacionBlog';
 import { FaStar, FaStarHalfAlt } from 'react-icons/fa';
 const Comentario = ({ comentario, onLike }) => {
-  
   const renderStars = () => {
     const rating = comentario.puntuacion;
-    
     const starArray = [];
     for (let i = 1; i <= 5; i++) {
       if (i <= rating) {
@@ -26,10 +24,7 @@ const Comentario = ({ comentario, onLike }) => {
 
   return (
     <div>
-      
-    
     <div className="flex items-center border-b border-gray-300 py-4">
-      
       <img
         src="https://via.placeholder.com/50"
         alt={comentario.nombreAutor}
@@ -42,16 +37,12 @@ const Comentario = ({ comentario, onLike }) => {
         </div>
         <p>{comentario.comentarioCompleto}</p>
         <p
-          
           className="text-gray-500 cursor-pointer hover:text-blue-500 focus:outline-none flex"
         >
          {renderStars()}
-          
         </p>
       </div>
     </div>
-     
-     
     </div>
   );
 };

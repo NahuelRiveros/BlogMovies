@@ -46,7 +46,7 @@ function Nav() {
     <nav className="bg-gray-900 text-white px-5">
       <div className="mx-auto flex justify-between items-center py-4 px-8 lg:px-0">
         <div>
-          <img src="" alt="Logo" className="w-16 rounded-full" />
+          <Link to="/"><img src="../src/assets/logoImagen.png" alt="Logo" className="w-16 rounded-full" /></Link>
         </div>
         <div className="lg:flex items-center space-x-8">
           <ul className="hidden lg:flex gap-8 text-xl">
