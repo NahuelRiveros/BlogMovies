@@ -15,9 +15,12 @@ const Comentarios = () => {
   
   const obtenerComentarios = async () => {
     try {
-      const uriComentariosL = "http://localhost:8000/comentariosL/";
-      const response = await axios.get(uriComentariosL);
+      const uriComentariosL = "http://localhost:8000/comentariosE/";
+      const jsonId = {idBlog: IdBlog}
+      const response = await axios.post(uriComentariosL,jsonId);
+      //const response = await axios.post(uriComentariosL);
       setComentarios(response.data);
+      console.log(response.data)
     } catch (error) {
       console.error('Error al obtener comentarios:', error);
     }

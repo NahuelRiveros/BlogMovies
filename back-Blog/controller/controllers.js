@@ -72,6 +72,20 @@ export const listComentarios = async (req, res) => {
     }
 }
 
+export const listComentariosEspecificos = async (req, res) => {
+    try {
+        console.log(req.body)
+        const listComentarioPelicula = await tbComentarioPelicula.findAll({where:{idPelicula: req.body.idBlog}})
+        console.log(listComentarioPelicula)
+        const comentarios = listComentarioPelicula[0].dataValues.idComentario
+        const listComentario = await tbComentario.findAll({where:{idComentario: comentarios}});
+        return res.json({listComentario});
+        res.json({ msg: "Creado correctamente" });
+    } catch (err) {
+        res.json({ msg: err.message });
+    }
+}
+
 export const listComentariosPelis = async (req, res) => {
     try {
         const listComentarioPeli = await tbComentarioPelicula.findAll();
