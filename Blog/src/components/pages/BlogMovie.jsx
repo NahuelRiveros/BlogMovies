@@ -7,6 +7,7 @@ import Comentarios from "./comment";
 import Puntuacion from "./agregarBlog/puntuacionBlog/puntuacionBlog";
 function BlogMovie() {
   const navigate = useNavigate();
+  const [puntuacionGeneral, setPuntuacionGeneral] = useState(0);
   const [movieDetalle, setMovieDetalle] = useState({});
 
   //Formatear fecha de publicacion
@@ -19,15 +20,16 @@ function BlogMovie() {
 
   useEffect(() => {
     setMovieDetalle(MovieSelect.state.item);
+    setPuntuacionGeneral(MovieSelect.state.item.puntuacionGeneral);
   }, [MovieSelect.state.item]);
+  
   const IdBlog = localStorage.getItem("id");
 
   const backToMovie = () => {
     navigate("/");
   };
 
-  const renderStars = () => {
-    const rating = movieDetalle.puntuacionGeneral;
+  const renderStars = ( rating ) => {
     const starArray = [];
     for (let i = 1; i <= 5; i++) {
       if (i <= rating) {
@@ -42,7 +44,7 @@ function BlogMovie() {
   };
 
   {
-    console.log(movieDetalle);
+    console.log("AQUII",movieDetalle);
   }
 
   return (
@@ -67,7 +69,7 @@ function BlogMovie() {
               Estreno: {movieDetalle.descripcionPelicula}
             </p>
             <p className="text-lg text-gray-600 flex justify-center items-center">
-              Popularidad: {renderStars()}
+              Popularidad: {renderStars(puntuacionGeneral)}
             </p>
             <p className="text-lg text-gray-700">{fechaFormateada}</p>
           </div>
@@ -87,7 +89,7 @@ function BlogMovie() {
           Comentarios
         </label>
         <div className="mt-4">
-          <Comentarios />
+        <Comentarios /> 
         </div>
       </div>
     </div>

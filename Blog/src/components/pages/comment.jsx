@@ -4,7 +4,7 @@ import Comentario from './comments';
 import axios from "axios";
 
 const Comentarios = () => {
-  const [comentarios, setComentarios] = useState({ listComentario: [] });
+  const [comentarios, setComentarios] = useState([]);
   const [User, setUserData] = useState("");
   const URI = "http://localhost:8000/comentarios/";
   
@@ -19,15 +19,15 @@ const Comentarios = () => {
       const jsonId = {idBlog: IdBlog}
       const response = await axios.post(uriComentariosL,jsonId);
       //const response = await axios.post(uriComentariosL);
-      setComentarios(response.data);
-      console.log(response.data)
+      setComentarios(response.data.comentarios || []);
+      console.log("aqui",response.data.comentarios)
     } catch (error) {
       console.error('Error al obtener comentarios:', error);
     }
   }
-
+  // console.log(comentarios)
   const IdBlog = localStorage.getItem("id");
-
+  
   const handleSubmit = async (values, { resetForm }) => {
     if (User.usuario) {
       const nuevoComentario = {
@@ -40,7 +40,8 @@ const Comentarios = () => {
   
       try {
         await axios.post(URI, nuevoComentario);
-        setComentarios({...comentarios, listComentario: [...comentarios.listComentario, nuevoComentario]});
+        setComentarios([...comentarios, nuevoComentario]);
+        await obtenerComentarios();
         resetForm();
       } catch(err) {
         console.error('Error al agregar comentario:', err.message);
@@ -94,9 +95,12 @@ const Comentarios = () => {
         )}
       </Formik>
       <div>
-        {comentarios.listComentario.map((comentario,index) => (
+        
+
+        {  comentarios && comentarios.map((comentario,index) => (
           <Comentario key={index} comentario={comentario} onLike={handleLike} />
         ))}
+        
       </div>
     </div>
   );

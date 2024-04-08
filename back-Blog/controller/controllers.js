@@ -25,7 +25,7 @@ export const AddComentario = async (req, res) => {
         const ultimoComentario = await tbComentario.max("idComentario");
         console.log("se creo el comentario")
         // Crear una conexión entre la película y el nuevo comentario
-        await tbComentarioPelicula.create({ idPelicula, idComentario: ultimoComentario });
+        await tbComentarioPelicula.create({ idPelicula, idComentario: ultimoComentario }); 
         console.log("se creo la relacion")
         // Enviar respuesta de éxito al cliente
         res.json({ success: true, msg: "Comentario agregado correctamente" });
@@ -74,17 +74,27 @@ export const listComentarios = async (req, res) => {
 
 export const listComentariosEspecificos = async (req, res) => {
     try {
-        console.log(req.body)
-        const listComentarioPelicula = await tbComentarioPelicula.findAll({where:{idPelicula: req.body.idBlog}})
-        console.log(listComentarioPelicula)
-        const comentarios = listComentarioPelicula[0].dataValues.idComentario
-        const listComentario = await tbComentario.findAll({where:{idComentario: comentarios}});
-        return res.json({listComentario});
-        res.json({ msg: "Creado correctamente" });
+        const idPelicula = req.body.idBlog;
+        
+        // Obtener los IDs de los comentarios asociados a la película
+        const comentarioPeliculaIds = (await tbComentarioPelicula.findAll({
+            where: { idPelicula },
+            attributes: ['idComentario']
+        })).map(comentarioPelicula => comentarioPelicula.idComentario);
+
+        // Obtener los comentarios asociados a los IDs obtenidos
+        const comentarios = await tbComentario.findAll({
+            where: { idComentario: comentarioPeliculaIds }
+        });
+
+        return res.json({ comentarios });
+        
     } catch (err) {
-        res.json({ msg: err.message });
+        console.log(err.message);
+        return res.status(500).json({ error: 'Hubo un error al procesar la solicitud.' });
     }
-}
+} 
+
 
 export const listComentariosPelis = async (req, res) => {
     try {
